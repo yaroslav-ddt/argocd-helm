@@ -9,7 +9,7 @@ spec:
   source:
     chart: argocd-helm
     repoURL: {{ .Values.argocd.repoURL }}
-    targetRevision: HEAD
+    targetRevision: 0.1.0
     helm:
       releaseName: argocd-helm
   destination:
