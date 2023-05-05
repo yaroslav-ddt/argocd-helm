@@ -15,7 +15,7 @@ certmanager:
 
 argocd:
   domainname: argocdyy.crabdance.com
-  repoURL: https://github.com/yaroslav-ddt/argocd-helm.git
+  repoURL: https://github.com/yaroslav-ddt/argocd-helm
 
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault
