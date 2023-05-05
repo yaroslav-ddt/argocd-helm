@@ -19,6 +19,6 @@ entries:
     name: argocd-helm
     type: application
     urls:
-    - https://yaroslav-ddt.github.io/argocd-helm/argocd-helm-0.1.0.tgz
+    - https://github.com/yaroslav-ddt/argocd-helm/archive/refs/tags/v1.0.0.tar.gz
     version: 0.1.0
 generated: "2023-05-05T23:11:32.376415913+02:00"
