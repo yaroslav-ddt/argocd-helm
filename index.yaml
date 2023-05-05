@@ -3,7 +3,7 @@ entries:
   argocd-helm:
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-05T23:07:42.643982625+02:00"
+    created: "2023-05-05T23:11:32.410226523+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -19,6 +19,6 @@ entries:
     name: argocd-helm
     type: application
     urls:
-    - argocd-helm-0.1.0.tgz
+    - https://yaroslav-ddt.github.io/argocd-helm/argocd-helm-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-05T23:07:42.609940433+02:00"
+generated: "2023-05-05T23:11:32.376415913+02:00"
