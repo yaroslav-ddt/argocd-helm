@@ -11,7 +11,7 @@ certmanager:
   # staging https://acme-staging-v02.api.letsencrypt.org/directory 
   # production https://acme-v02.api.letsencrypt.org/directory  
   issuerUrl: https://acme-v02.api.letsencrypt.org/directory
-  email: yaroslav@datainsights.de
+  email: yy@datainsights.de
 
 argocd:
   domainname: argocdyy.crabdance.com
