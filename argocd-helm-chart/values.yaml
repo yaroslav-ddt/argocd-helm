@@ -1,0 +1,32 @@
+# Default values for argocd-helm.
+ingress-nginx:
+  controller:
+    replicaCount: 2
+    service:
+      enabled: true
+      annotations: {service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: healthz}
+
+certmanager:
+  issuer: letsencrypt
+  # staging https://acme-staging-v02.api.letsencrypt.org/directory 
+  # production https://acme-v02.api.letsencrypt.org/directory  
+  issuerUrl: https://acme-v02.api.letsencrypt.org/directory
+  email: yy@datainsights.de
+
+argocd:
+  domainname: argocdyy.crabdance.com
+  repoHelmURL: https://yaroslav-ddt.github.io/argocd-helm/
+  repoValuesURL: https://github.com/yaroslav-ddt/argocd-helm.git
+
+oidc:
+  # the names of clienId and clientSecret secrets in the key Vault
+  clientID: oidc-azure-clientId
+  clientSecret: oidc-azure-clientSecret
+  requestedScopes:
+       - openid
+       - email
+
+rbac:
+  adminGroup: 736e6f41-0000-0000-0000-ff85d34a5b4d
+
+tennantId: 703922c4-0000-0000-0000-a969c8abc975

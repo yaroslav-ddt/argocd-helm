@@ -6,12 +6,17 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
+  sources:
+  - repoURL: {{ .Values.argocd.repoHelmURL }}
     chart: argocd-helm
-    repoURL: {{ .Values.argocd.repoURL }}
     targetRevision: 0.1.0
     helm:
       releaseName: argocd-helm
+      valueFiles:
+      - $values/values-yy.yaml      
+  - repoURL: {{ .Values.argocd.repoValuesURL }}
+    targetRevision: main
+    ref: values      
   destination:
     server: "https://kubernetes.default.svc"
     namespace: argocd
