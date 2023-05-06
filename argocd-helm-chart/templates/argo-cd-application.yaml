@@ -8,7 +8,7 @@ spec:
   project: default
   sources:
   - repoURL: {{ .Values.argocd.repoHelmURL }}
-    chart: argocd-helm
+    chart: {{ .Values.argocd.chart }}
     targetRevision: {{ .Values.argocd.targetRevision }}
     helm:
       releaseName: argocd-helm
