@@ -18,7 +18,8 @@ argocd:
   repoHelmURL: https://yaroslav-ddt.github.io/argocd-helm/argocd-helm-chart/
   repoValuesURL: https://github.com/yaroslav-ddt/argocd-helm.git
   valuesFileName: values-yy.yaml
-  targetRevision: 1.0.2
+  chart: argocd-helm
+  targetRevision: 1.0.3
 
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault
