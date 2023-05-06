@@ -3,7 +3,7 @@ entries:
   argocd-helm:
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-05T23:11:32.410226523+02:00"
+    created: "2023-05-06T12:07:36.424562551+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -15,10 +15,10 @@ entries:
       repository: https://charts.external-secrets.io
       version: 0.8.1
     description: ArgoCD Helm Chart for AKS
-    digest: 0d8e3bdb1c5828bf805467e04c6f7779bded19d70893788ed33a30eb8d38a404
+    digest: 7ec9abb02ee7b78e05928a9052024e4d867c8a368a7871293f22650ca464f707
     name: argocd-helm
     type: application
     urls:
-    - https://github.com/yaroslav-ddt/argocd-helm/archive/refs/tags/v1.0.0.tar.gz
+    - https://github.com/yaroslav-ddt/argocd-helm/releases/download/untagged-981e837410c879a42162/argocd-helm-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-05T23:11:32.376415913+02:00"
+generated: "2023-05-06T12:07:36.376177738+02:00"
