@@ -17,6 +17,8 @@ argocd:
   domainname: argocdyy.crabdance.com
   repoHelmURL: https://yaroslav-ddt.github.io/argocd-helm/
   repoValuesURL: https://github.com/yaroslav-ddt/argocd-helm.git
+  valuesFileName: values-yy.yaml
+  targetRevision: 1.0.2
 
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault

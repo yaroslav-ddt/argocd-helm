@@ -9,11 +9,11 @@ spec:
   sources:
   - repoURL: {{ .Values.argocd.repoHelmURL }}
     chart: argocd-helm
-    targetRevision: 0.1.0
+    targetRevision: {{ .Values.argocd.targetRevision }}
     helm:
       releaseName: argocd-helm
       valueFiles:
-      - $values/values-yy.yaml      
+      - $values/{{ .Values.argocd.valuesFileName }}
   - repoURL: {{ .Values.argocd.repoValuesURL }}
     targetRevision: main
     ref: values      
