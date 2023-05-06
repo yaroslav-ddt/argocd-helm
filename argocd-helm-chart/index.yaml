@@ -3,7 +3,27 @@ entries:
   argocd-helm:
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-06T13:09:05.553117826+02:00"
+    created: "2023-05-06T21:49:46.835148632+02:00"
+    dependencies:
+    - name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: 4.6.0
+    - name: cert-manager
+      repository: https://charts.jetstack.io
+      version: "1.11"
+    - name: external-secrets
+      repository: https://charts.external-secrets.io
+      version: 0.8.1
+    description: ArgoCD Helm Chart for AKS
+    digest: 1482fe901e13d00c5d59375322d0d76a9170704566b2c356470ec40fdc494def
+    name: argocd-helm
+    type: application
+    urls:
+    - argocd-helm-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-06T21:49:46.806312063+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -23,7 +43,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-06T13:09:05.520699741+02:00"
+    created: "2023-05-06T21:49:46.77780679+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -41,4 +61,4 @@ entries:
     urls:
     - argocd-helm-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-06T13:09:05.47703394+02:00"
+generated: "2023-05-06T21:49:46.747302903+02:00"
