@@ -30,6 +30,14 @@ oidc:
        - email
 
 rbac:
-  adminGroup: 736e6f41-ec48-48bc-a524-ff85d34a5b4d
+  policy:
+    csv: |
+      p, role:ops, applications, *, */*, allow
+      p, role:ops, logs, get, */*, allow
+      p, role:ops, exec, create, */*, allow
+      p, role:ops, clusters, get, *, allow
+      p, role:ops, repositories, get, *, allow
+      g, 736e6f41-ec48-48bc-a524-ff85d34a5b4d, role:admin
+    default: role:readonly
 
 tennantId: 703922c4-f042-4683-9e67-a969c8abc975
