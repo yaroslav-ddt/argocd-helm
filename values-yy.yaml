@@ -19,7 +19,7 @@ argocd:
   repoValuesURL: https://github.com/yaroslav-ddt/argocd-helm.git
   valuesFileName: values-yy.yaml
   chart: argocd-helm
-  targetRevision: 1.0.3
+  targetRevision: 1.0.4
 
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault
@@ -41,3 +41,5 @@ rbac:
     default: role:readonly
 
 tennantId: 703922c4-f042-4683-9e67-a969c8abc975
+
+appVersion: "0.0.4"
