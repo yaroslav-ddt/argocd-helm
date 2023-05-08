@@ -2,6 +2,7 @@ namespace: argocd
 
 # Default values for argocd-helm.
 ingress-nginx:
+  namespace: ingress
   controller:
     replicaCount: 2
     service:
@@ -9,11 +10,15 @@ ingress-nginx:
       annotations: {service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: healthz}
 
 certmanager:
+  namespace: cert-manager
   issuer: letsencrypt
   # staging https://acme-staging-v02.api.letsencrypt.org/directory 
   # production https://acme-v02.api.letsencrypt.org/directory  
   issuerUrl: https://acme-v02.api.letsencrypt.org/directory
   email: yy@datainsights.de
+
+external-secrets:
+  namespace: external-secrets
 
 argocd:
   domainname: argocdyy.crabdance.com
