@@ -3,7 +3,27 @@ entries:
   argocd-helm:
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-08T18:29:03.398490888+02:00"
+    created: "2023-05-08T19:50:52.255750747+02:00"
+    dependencies:
+    - name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: 4.6.0
+    - name: cert-manager
+      repository: https://charts.jetstack.io
+      version: "1.11"
+    - name: external-secrets
+      repository: https://charts.external-secrets.io
+      version: 0.8.1
+    description: ArgoCD Helm Chart for AKS
+    digest: 920c072cfaacc7b785f37edf70e9289a816400c56f4294f936b9fc3c72bf700d
+    name: argocd-helm
+    type: application
+    urls:
+    - argocd-helm-1.0.11.tgz
+    version: 1.0.11
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-08T19:50:52.211433296+02:00"
     description: ArgoCD Helm Chart for AKS
     digest: a978f6108770852783bd32eff82b1d56a7cb04a868c71074ff13143cb192d53d
     name: argocd-helm
@@ -13,7 +33,7 @@ entries:
     version: 1.0.10
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-08T18:29:03.728772851+02:00"
+    created: "2023-05-08T19:50:52.575992514+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -33,7 +53,7 @@ entries:
     version: 1.0.9
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-08T18:29:03.695826942+02:00"
+    created: "2023-05-08T19:50:52.544293513+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -53,7 +73,7 @@ entries:
     version: 1.0.8
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-08T18:29:03.664662731+02:00"
+    created: "2023-05-08T19:50:52.509234105+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -73,7 +93,7 @@ entries:
     version: 1.0.7
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-08T18:29:03.630246544+02:00"
+    created: "2023-05-08T19:50:52.473437098+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -93,7 +113,7 @@ entries:
     version: 1.0.6
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-08T18:29:03.601389543+02:00"
+    created: "2023-05-08T19:50:52.435296497+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -113,7 +133,7 @@ entries:
     version: 1.0.5
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-08T18:29:03.564449963+02:00"
+    created: "2023-05-08T19:50:52.398606984+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -133,7 +153,7 @@ entries:
     version: 1.0.4
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-08T18:29:03.473945314+02:00"
+    created: "2023-05-08T19:50:52.321213039+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -153,7 +173,7 @@ entries:
     version: 1.0.3
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-08T18:29:03.438438101+02:00"
+    created: "2023-05-08T19:50:52.286325689+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -173,7 +193,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 0.0.0
-    created: "2023-05-08T18:29:03.381309335+02:00"
+    created: "2023-05-08T19:50:52.189751549+02:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -191,4 +211,4 @@ entries:
     urls:
     - argocd-helm-0.1.0.tgz
     version: 0.1.0
-generated: "2023-05-08T18:29:03.328411986+02:00"
+generated: "2023-05-08T19:50:52.147468755+02:00"
