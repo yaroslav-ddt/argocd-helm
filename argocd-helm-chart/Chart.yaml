@@ -1,5 +1,6 @@
 apiVersion: v2
 name: argocd-helm
+
 description: ArgoCD Helm Chart for AKS
 # A chart can be either an 'application' or a 'library' chart.
 #
