@@ -22,23 +22,3 @@ version: 1.0.9
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "0.0.0"
-
-dependencies:
-  - name: ingress-nginx
-    version: 4.6.0
-    repository: https://kubernetes.github.io/ingress-nginx
-    namespace: ingress
-    includeCRDs: false
-    name: ingress-nginx
-  - name: cert-manager
-    version: 1.11
-    repository: https://charts.jetstack.io
-    installCRDs: true
-    namespace: cert-manager
-    name: cert-manager
-  - name: external-secrets
-    version: 0.8.1
-    repository: https://charts.external-secrets.io
-    namespace: external-secrets
-    installCRDs: true
-    name: external-secrets
