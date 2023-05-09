@@ -24,7 +24,7 @@ version: 0.1.0
 appVersion: "0.0.0"
 
 dependencies:
-  - name: cert-manager
+  - name: certmanager
     version: 1.11
     repository: https://charts.jetstack.io
     installCRDs: true
