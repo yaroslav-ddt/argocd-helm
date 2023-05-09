@@ -4,7 +4,7 @@ certmanager:
   issuer: letsencrypt
 
 argocd:
-  domainname: argocdyy.crabdance.com
+  domainname: argocd.crabdance.com
 
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault
