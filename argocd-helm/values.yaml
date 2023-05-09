@@ -1,3 +1,6 @@
+certmanager:
+  issuer: letsencrypt
+  
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault
   clientID: oidc-azure-clientId
