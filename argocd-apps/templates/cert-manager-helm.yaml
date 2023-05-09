@@ -15,7 +15,7 @@ spec:
   source:
     repoURL: https://charts.jetstack.io
     chart: cert-manager
-    version: '1.11'
+    targetRevision: '1.11'
     helm:
       values: |
         issuer: letsencrypt
