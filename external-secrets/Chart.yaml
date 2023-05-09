@@ -29,3 +29,4 @@ dependencies:
     repository: https://charts.external-secrets.io
     installCRDs: true
     namespace: external-secrets
+    name: external-secrets
