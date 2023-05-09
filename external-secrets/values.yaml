@@ -1,5 +1,0 @@
-external-secrets:
-  fullnameOverride: external-secrets
-  nameOverride: external-secrets
-
-namespace: external-secrets

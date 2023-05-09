@@ -1,7 +1,0 @@
-ingress-nginx:
-  fullnameOverride: ingress-nginx
-  controller:
-    replicaCount: 2
-    service:
-      enabled: true
-      annotations: {service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: healthz}
