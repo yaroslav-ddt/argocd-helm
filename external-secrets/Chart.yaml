@@ -28,3 +28,4 @@ dependencies:
     version: 0.8.1
     repository: https://charts.external-secrets.io
     installCRDs: true
+    namespace: external-secrets

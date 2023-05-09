@@ -28,4 +28,3 @@ dependencies:
     version: 1.11
     repository: https://charts.jetstack.io
     installCRDs: true
-    namespace: external-secrets

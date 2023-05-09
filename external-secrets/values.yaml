@@ -1,2 +1,4 @@
 external-secrets:
   fullnameOverride: external-secrets
+
+namespace: external-secrets
