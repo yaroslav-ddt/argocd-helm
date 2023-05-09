@@ -15,16 +15,12 @@ spec:
   source:
     repoURL: https://charts.jetstack.io
     chart: cert-manager
-    version: 1.11
+    targetRevision: 1.11
     helm:
-      parameters:
-        - installCRDs: true
       values:
-        - issuer: letsencrypt
-  # staging https://acme-staging-v02.api.letsencrypt.org/directory 
-  # production https://acme-v02.api.letsencrypt.org/directory  
-        - issuerUrl: https://acme-v02.api.letsencrypt.org/directory
-        - email: yy@datainsights.de 
+        issuer: letsencrypt
+        issuerUrl: https://acme-v02.api.letsencrypt.org/directory
+        email: yy@datainsights.de 
   syncPolicy:
     automated:
       prune: true
