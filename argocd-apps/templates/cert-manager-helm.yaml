@@ -13,9 +13,18 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: cert-manager
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    repoURL: https://charts.jetstack.io
+    chart: cert-manager
+    version: 1.11
+    helm:
+      parameters:
+        installCRDs: true
+      values:
+        issuer: letsencrypt
+  # staging https://acme-staging-v02.api.letsencrypt.org/directory 
+  # production https://acme-v02.api.letsencrypt.org/directory  
+        issuerUrl: https://acme-v02.api.letsencrypt.org/directory
+        email: yy@datainsights.de 
   syncPolicy:
     automated:
       prune: true
