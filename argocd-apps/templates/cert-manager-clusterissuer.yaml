@@ -1,0 +1,21 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: {{ .Values.certmanager.metadata.name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"    
+spec:
+  acme:
+    server: {{ .Values.certmanager.spec.acme.server }}
+    email: {{ .Values.certmanager.spec.acme.email }}
+    privateKeySecretRef:
+      name: {{ .Values.certmanager.spec.acme.privateKeySecretRef.name }}
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+          podTemplate:
+            spec:
+              nodeSelector:
+                "kubernetes.io/os": linux

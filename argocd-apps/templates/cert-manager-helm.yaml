@@ -4,7 +4,7 @@ metadata:
   name: cert-manager
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"  
+    argocd.argoproj.io/sync-wave: "1"  
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -19,11 +19,7 @@ spec:
     helm:
       parameters:
       - name: installCRDs
-        value: 'true'      
-      values: |
-        issuer: letsencrypt
-        issuerUrl: https://acme-v02.api.letsencrypt.org/directory
-        email: yy@datainsights.de 
+        value: 'true'
   syncPolicy:
     automated:
       prune: true

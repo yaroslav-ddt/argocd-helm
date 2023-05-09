@@ -5,3 +5,16 @@ spec:
     repoURL: https://github.com/yaroslav-ddt/argocd-helm.git
     targetRevision: HEAD
 values: values-yy.yaml
+
+certmanager:
+  metadata:
+    name: letsencrypt
+  spec:
+    acme:
+      # staging https://acme-staging-v02.api.letsencrypt.org/directory 
+      # production https://acme-v02.api.letsencrypt.org/directory  
+      server: https://acme-v02.api.letsencrypt.org/directory
+      email: yy@datainsights.de
+      privateKeySecretRef:
+        name: letsencrypt
+        
