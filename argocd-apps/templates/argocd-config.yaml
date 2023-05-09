@@ -22,4 +22,8 @@ spec:
       - $values/{{ .Values.values }}    
   - repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    ref: values  
+    ref: values
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
