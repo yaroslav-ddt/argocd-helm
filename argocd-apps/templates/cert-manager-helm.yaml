@@ -18,9 +18,12 @@ spec:
     targetRevision: 1.11
     helm:
       values:
-        issuer: letsencrypt
-        issuerUrl: https://acme-v02.api.letsencrypt.org/directory
-        email: yy@datainsights.de 
+        - name: issuer
+          value: letsencrypt
+        - name: issuerUrl
+          value: https://acme-v02.api.letsencrypt.org/directory
+        - name email
+          value: yy@datainsights.de 
   syncPolicy:
     automated:
       prune: true
