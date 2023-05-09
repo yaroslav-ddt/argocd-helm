@@ -15,7 +15,6 @@ spec:
   sources:
   - repoURL: {{ .Values.spec.source.repoURL }}
     path: argocd-helm
-    type: git
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
       releaseName: argocd-helm
