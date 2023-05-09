@@ -1,11 +1,4 @@
-# Default values for argocd-helm.
-ingress-nginx:
-  namespace: ingress
-  controller:
-    replicaCount: 2
-    service:
-      enabled: true
-      annotations: {service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: healthz}
+values: values-yy.yaml
 
 certmanager:
   metadata:
@@ -19,16 +12,8 @@ certmanager:
       privateKeySecretRef:
         name: letsencrypt
 
-external-secrets:
-  namespace: external-secrets
-
 argocd:
   domainname: argocd.crabdance.com
-  repoHelmURL: https://yaroslav-ddt.github.io/argocd-helm/argocd-helm-chart/
-  repoValuesURL: https://github.com/yaroslav-ddt/argocd-helm.git
-  valuesFileName: values-yy.yaml
-  chart: argocd-helm
-  targetRevision: 1.0.6
 
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault
@@ -50,5 +35,3 @@ rbac:
     default: role:readonly
 
 tennantId: 703922c4-f042-4683-9e67-a969c8abc975
-
-appVersion: "0.0.4"
