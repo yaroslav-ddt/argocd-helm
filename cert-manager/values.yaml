@@ -1,3 +1,6 @@
+cert-manager:
+  fullnameOverride: cert-manager
+  
 certmanager:
   issuer: letsencrypt
   # staging https://acme-staging-v02.api.letsencrypt.org/directory 
