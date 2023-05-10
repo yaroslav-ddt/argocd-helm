@@ -16,6 +16,13 @@ spec:
     repoURL: https://kubernetes.github.io/ingress-nginx
     chart: ingress-nginx
     targetRevision: '4.6.0'
+    helm:
+      values: |
+        controller:
+          replicaCount: 2
+          service:
+            enabled: true
+            annotations: {service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: healthz}      
   syncPolicy:
     automated:
       prune: false
