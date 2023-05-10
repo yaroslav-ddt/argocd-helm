@@ -22,4 +22,21 @@ spec:
       - $values/{{ .Values.values }}    
   - repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    ref: values  
+    ref: values 
+  ignoreDifferences:
+  - group: '*'
+    kind: Secret
+    name: argocd-secret
+    namespace: argocd
+    jsonPointers:
+    - /data
+    - /stringData
+  - group: '*'
+    kind: ConfigMap
+    name: argocd-cm
+    namespace: argocd
+    jsonPointers:
+    - /data/host
+    - /data/url
+    - /stringData/host
+    - /stringData/url
