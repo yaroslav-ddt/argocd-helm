@@ -41,3 +41,6 @@ spec:
     - /data/url
     - /stringData/host
     - /stringData/url
+  - group: 'admissionregistration.k8s.io'
+    kind: ValidatingWebhookConfiguration
+    name: cert-manager-webhook
