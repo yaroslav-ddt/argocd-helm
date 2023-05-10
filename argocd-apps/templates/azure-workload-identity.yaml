@@ -16,6 +16,9 @@ spec:
     repoURL: https://azure.github.io/azure-workload-identity/charts
     chart: workload-identity-webhook
     targetRevision: '1.1.0'
+    helm:
+      values: |
+        azureTenantID: {{ .Values.tennantId }}
   syncPolicy:
     automated:
       prune: true
