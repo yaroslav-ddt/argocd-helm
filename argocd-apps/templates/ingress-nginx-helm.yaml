@@ -18,7 +18,7 @@ spec:
     targetRevision: '4.6.0'
   syncPolicy:
     automated:
-      prune: true
+      prune: false
       selfHeal: true
 
 
