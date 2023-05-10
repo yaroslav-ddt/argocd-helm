@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: workload-identity-webhook
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"  
@@ -9,19 +9,14 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: cert-manager
+    namespace: azure-workload-identity-system
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    repoURL: https://charts.jetstack.io
-    chart: cert-manager
-    targetRevision: '1.11'
-    helm:
-      parameters:
-      - name: installCRDs
-        value: 'true'
+    repoURL: https://azure.github.io/azure-workload-identity/charts
+    chart: workload-identity-webhook
+    targetRevision: '1.1.0'
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-      syncInterval: 5m
