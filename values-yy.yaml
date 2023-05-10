@@ -23,7 +23,7 @@ external-secrets:
   namespace: external-secrets
 
 argocd:
-  domainname: argocd01.crabdance.com
+  domainname: argocdyy.mooo.com
   repoHelmURL: https://yaroslav-ddt.github.io/argocd-helm/argocd-helm-chart/
   repoValuesURL: https://github.com/yaroslav-ddt/argocd-helm.git
   valuesFileName: values-yy.yaml
