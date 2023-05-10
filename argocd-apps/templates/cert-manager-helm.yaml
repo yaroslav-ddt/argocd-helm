@@ -24,3 +24,18 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  ignoreDifferences:
+  - group: '*'
+    kind: Secret
+    name: argocd-secret
+    jsonPointers:
+    - /data
+    - /stringData
+  - group: '*'
+    kind: ConfigMap
+    name: argocd-cm
+    jsonPointers:
+    - /data/host
+    - /data/url
+    - /stringData/host
+    - /stringData/url
