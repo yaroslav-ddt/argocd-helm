@@ -1,5 +1,5 @@
 argoSSOAdmin:
-  rbacRule:"'Admins' in groups"
+  rbacRule:"'Admin' in groups"
 
 argo-workflows:
   singleNamespace: false
