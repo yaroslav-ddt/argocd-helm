@@ -39,7 +39,7 @@ argo-workflows:
         value: "true"
     extraArgs:
       - --auth-mode=sso
-      #- --auth-mode=client
+      - --auth-mode=client
     secure: true
     ingress:
       enabled: true
@@ -60,7 +60,6 @@ argo-workflows:
         name: argo-sso-secret
         key: oidc-azure-clientSecret
       scopes:
-        - openid
         - groups
         - email
       customGroupClaimName: roles
