@@ -66,3 +66,6 @@ argo-workflows:
       unused.userInfoPath: https://graph.microsoft.com/v1.0/me/getMemberGroups
       rbac:
         enabled: true
+    logging:
+      # -- Set the logging level (one of: `debug`, `info`, `warn`, `error`)
+      level: debug
