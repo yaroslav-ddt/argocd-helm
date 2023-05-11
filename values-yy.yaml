@@ -28,6 +28,7 @@ oidc:
   clientSecret: oidc-azure-clientSecret
   requestedScopes:
        - openid
+       - groups
        - email
 
 # argocd rbac
