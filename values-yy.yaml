@@ -27,6 +27,7 @@ oidc:
   clientID: oidc-azure-clientId
   clientSecret: oidc-azure-clientSecret
   requestedScopes:
+       - groups
        - openid
        - email
 
@@ -44,7 +45,9 @@ rbac:
 
 tennantId: 703922c4-f042-4683-9e67-a969c8abc975
 
-appVersion: "0.0.4"
+# Argo-workflows configurations
+argoSSOAdmin:
+  rbacRule: '"''Admin'' in groups"'
 
 argo-workflows:
   server:
