@@ -1,3 +1,6 @@
+argoSSOAdmin:
+  rbacRule:"'Admins' in groups"
+
 argo-workflows:
   singleNamespace: false
   fullnameOverride: "argo"
@@ -62,7 +65,7 @@ argo-workflows:
         name: argo-sso-secret
         key: oidc-azure-clientSecret
       scopes:
-        - openid
+        - openid      
         - email
       customGroupClaimName: roles
       unused.userInfoPath: https://graph.microsoft.com/v1.0/me/getMemberGroups
@@ -70,4 +73,4 @@ argo-workflows:
         enabled: true
     logging:
       # -- Set the logging level (one of: `debug`, `info`, `warn`, `error`)
-      level: debug
+      level: info
