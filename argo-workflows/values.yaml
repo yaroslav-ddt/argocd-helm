@@ -1,0 +1,69 @@
+argo-workflows:
+  singleNamespace: false
+  fullnameOverride: "argo"
+  workflow:
+    serviceAccount:
+      name: "argo"
+    rbac:
+      create: true
+  controller:
+    name: workflow-controller
+    serviceAccount:
+      # -- Create a service account for the controller
+      create: false
+      # -- Service account name
+      name: "argo-workflow"
+      # -- Annotations applied to created service account
+      annotations: {}
+    workflowNamespaces:
+      - argo
+    rbac:
+      create: true
+
+    workflowDefaults:
+      spec:
+        # set default serviceAccount
+        serviceAccountName: argo
+
+    # -- The number of controller pods to run
+    replicas: 1
+
+  server:
+    serviceAccount:
+      create: true
+      name: "argo"
+    replicas: 1
+      
+    extraEnv:
+      - name: SSO_DELEGATE_RBAC_TO_NAMESPACE
+        value: "true"
+    extraArgs:
+      - --auth-mode=sso
+      - --auth-mode=client
+    secure: true
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/backend-protocol: https
+      hosts: [] # from values
+
+      ingressClassName: "nginx"
+      pathType: Prefix
+      tls: []
+    sso:
+      issuer: https://login.microsoftonline.com/703922c4-f042-4683-9e67-a969c8abc975/v2.0 # Has to be configured
+      clientId:
+        name: argo-sso-secret
+        key: oidc.azure.clientId
+      clientSecret:
+        name: argo-sso-secret
+        key: oidc.azure.clientSecret
+      scopes:
+        - profile
+        - email
+      customGroupClaimName: roles
+      unused.userInfoPath: https://graph.microsoft.com/v1.0/me/getMemberGroups
+      rbac:
+        enabled: true
