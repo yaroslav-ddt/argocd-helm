@@ -39,7 +39,7 @@ argo-workflows:
         value: "true"
     extraArgs:
       - --auth-mode=sso
-      - --auth-mode=client
+      #- --auth-mode=client
     secure: true
     ingress:
       enabled: true
