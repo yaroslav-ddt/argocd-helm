@@ -38,8 +38,10 @@ argo-workflows:
       - name: SSO_DELEGATE_RBAC_TO_NAMESPACE
         value: "true"
     extraArgs:
-      - --auth-mode=sso
-      - --auth-mode=client
+      - --auth-mode
+      - sso
+      - --auth-mode
+      - client
     secure: true
     ingress:
       enabled: true
