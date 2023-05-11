@@ -61,7 +61,7 @@ argo-workflows:
         name: argo-sso-secret
         key: oidc-azure-clientSecret
       scopes:
-        - profile
+        - openid
         - email
       customGroupClaimName: roles
       unused.userInfoPath: https://graph.microsoft.com/v1.0/me/getMemberGroups
