@@ -19,16 +19,8 @@ certmanager:
       privateKeySecretRef:
         name: letsencrypt
 
-external-secrets:
-  namespace: external-secrets
-
 argocd:
   domainname: argocd.ignorelist.com
-  repoHelmURL: https://yaroslav-ddt.github.io/argocd-helm/argocd-helm-chart/
-  repoValuesURL: https://github.com/yaroslav-ddt/argocd-helm.git
-  valuesFileName: values-yy.yaml
-  chart: argocd-helm
-  targetRevision: 1.0.6
 
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault
@@ -38,6 +30,7 @@ oidc:
        - openid
        - email
 
+# argocd rbac
 rbac:
   policy:
     csv: |
@@ -52,3 +45,13 @@ rbac:
 tennantId: 703922c4-f042-4683-9e67-a969c8abc975
 
 appVersion: "0.0.4"
+
+argo-workflows:
+  server:
+    ingress:
+      hosts:
+        - argo-workflows.ignorelist.com
+      tls:
+      - secretName: argo-cert
+        hosts:
+          - argo-workflows.ignorelist.com
