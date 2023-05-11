@@ -27,7 +27,6 @@ oidc:
   clientID: oidc-azure-clientId
   clientSecret: oidc-azure-clientSecret
   requestedScopes:
-       - groups
        - openid
        - email
 
