@@ -48,9 +48,7 @@ argo-workflows:
         nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
         nginx.ingress.kubernetes.io/backend-protocol: https
       hosts: [] # from values
-
       ingressClassName: "nginx"
-      pathType: Prefix
       tls: []
     sso:
       issuer: https://login.microsoftonline.com/703922c4-f042-4683-9e67-a969c8abc975/v2.0 # Has to be configured
