@@ -56,10 +56,10 @@ argo-workflows:
       issuer: https://login.microsoftonline.com/703922c4-f042-4683-9e67-a969c8abc975/v2.0 # Has to be configured
       clientId:
         name: argo-sso-secret
-        key: oidc.azure.clientId
+        key: oidc-azure-clientId
       clientSecret:
         name: argo-sso-secret
-        key: oidc.azure.clientSecret
+        key: oidc-azure-clientSecret
       scopes:
         - profile
         - email
