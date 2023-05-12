@@ -28,7 +28,7 @@ spec:
       prune: false
       selfHeal: false
     syncOptions:
-      - RespectIgnoreDifferences=true    
+      - FailOnSharedResource=true    
   ignoreDifferences:
   - group: '*'
     kind: Secret
