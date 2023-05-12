@@ -24,8 +24,8 @@ argocd:
 
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault
-  clientID: oidc-azure-clientId
-  clientSecret: oidc-azure-clientSecret
+  clientID: argocd-sso-secret:oidc-azure-clientId
+  clientSecret: argocd-sso-secret:oidc-azure-clientSecret
   requestedScopes:
        - openid
        - email
