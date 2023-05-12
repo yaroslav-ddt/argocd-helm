@@ -21,6 +21,7 @@ certmanager:
 
 argocd:
   domainname: argocd-yy.jumpingcrab.com
+  project: argocd
 
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault
