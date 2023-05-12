@@ -4,6 +4,7 @@ spec:
   source:
     repoURL: https://github.com/yaroslav-ddt/argocd-helm.git
     targetRevision: HEAD
+values: values-yy.yaml
 
 argocd:
   domainname: argocd.crabdance.com
