@@ -20,7 +20,7 @@ certmanager:
         name: letsencrypt
 
 argocd:
-  domainname: argocd.ignorelist.com
+  domainname: argocdyy.jumpingcrab.com
 
 oidc:
   # the names of clienId and clientSecret secrets in the key Vault
@@ -52,8 +52,8 @@ argo-workflows:
   server:
     ingress:
       hosts:
-        - argo-workflows.ignorelist.com
+        - argo-workflowsyy.jumpingcrab.com
       tls:
       - secretName: argo-cert
         hosts:
-          - argo-workflows.ignorelist.com
+          - argo-workflowsyy.jumpingcrab.com
