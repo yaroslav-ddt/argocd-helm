@@ -57,7 +57,7 @@ argo-workflows:
       tls: []
     sso:
       issuer: https://login.microsoftonline.com/703922c4-f042-4683-9e67-a969c8abc975/v2.0 # Has to be configured
-      redirectUrl: https://argo-workflows.ignorelist.com/oauth2/callback
+      redirectUrl: https://argo-workflows-yy.jumpingcrab.com/oauth2/callback
       clientId:
         name: argo-sso-secret
         key: oidc-azure-clientId
