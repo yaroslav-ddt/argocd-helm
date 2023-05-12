@@ -11,7 +11,7 @@ spec:
   destination:
     namespace: azure-workload-identity-system
     server: {{ .Values.spec.destination.server }}
-  project: default
+  project: {{ .Values.argocd.project }}
   source:
     repoURL: https://azure.github.io/azure-workload-identity/charts
     chart: workload-identity-webhook

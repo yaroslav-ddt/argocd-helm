@@ -11,7 +11,7 @@ spec:
   destination:
     namespace: cert-manager
     server: {{ .Values.spec.destination.server }}
-  project: default
+  project: {{ .Values.argocd.project }}
   source:
     repoURL: https://charts.jetstack.io
     chart: cert-manager

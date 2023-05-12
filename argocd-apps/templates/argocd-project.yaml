@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   generation: 1
-  name: argocd
+  name: {{ .Values.argocd.project }}
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
