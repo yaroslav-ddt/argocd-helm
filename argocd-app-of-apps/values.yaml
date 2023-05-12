@@ -1,5 +1,10 @@
+spec:
   destination:
     server: https://kubernetes.default.svc
   source:
     repoURL: https://github.com/yaroslav-ddt/argocd-helm.git
     targetRevision: HEAD
+
+argocd:
+  domainname: argocd.crabdance.com
+  project: argocd
