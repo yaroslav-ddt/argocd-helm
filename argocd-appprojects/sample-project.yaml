@@ -18,9 +18,9 @@ spec:
   - name: dev
     description: DevOps privileges on the namespace
     policies:
-    - p, proj:sample-project:dev, applications, get, sample-app/*, allow
-    - p, proj:sample-project:dev, applications, sync, sample-app/*, allow
-    - p, proj:sample-project:dev, applications, delete, sample-app/*, allow
-    - p, proj:sample-project:dev, applications, action/*, sample-app/*, allow
-    - p, proj:sample-project:dev, logs, get, sample-app/*, allow
-    - p, proj:sample-project:dev, exec, create, sample-app/*, allow
+    - p, proj:sample-project:dev, applications, get, sample-project/*, allow
+    - p, proj:sample-project:dev, applications, sync, sample-project/*, allow
+    - p, proj:sample-project:dev, applications, delete, sample-project/*, allow
+    - p, proj:sample-project:dev, applications, action/*, sample-project/*, allow
+    - p, proj:sample-project:dev, logs, get, sample-project/*, allow
+    - p, proj:sample-project:dev, exec, create, sample-project/*, allow
