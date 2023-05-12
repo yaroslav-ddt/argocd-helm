@@ -24,4 +24,5 @@ spec:
     - p, proj:sample-project:dev-ops, applications, action/*, sample-app/*, allow
     - p, proj:sample-project:dev-ops, logs, get, sample-app/*, allow
     - p, proj:sample-project:dev-ops, exec, create, sample-app/*, allow
-    - g, f833f3fc-44f8-4035-9020-4d8a5beaf3ea, role:dev
+    groups:
+    - 'f833f3fc-44f8-4035-9020-4d8a5beaf3ea'
