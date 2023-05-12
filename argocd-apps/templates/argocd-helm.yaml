@@ -24,11 +24,9 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     ref: values
   syncPolicy:
-    automated:
-      prune: false
-      selfHeal: false
+    automated: {}
     syncOptions:
-      - FailOnSharedResource=true    
+      - FailOnSharedResource=true
   ignoreDifferences:
   - group: '*'
     kind: Secret
@@ -42,7 +40,10 @@ spec:
     name: argocd-cm
     namespace: argocd
     jsonPointers:
-    - /data/host
-    - /data/url
-    - /stringData/host
-    - /stringData/url
+    - /data
+  - group: '*'
+    kind: ConfigMap
+    name: argocd-rbac-cm
+    namespace: argocd
+    jsonPointers:
+    - /data

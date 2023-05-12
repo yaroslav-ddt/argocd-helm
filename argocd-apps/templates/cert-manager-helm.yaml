@@ -32,15 +32,6 @@ spec:
     jsonPointers:
     - /data
     - /stringData
-  - group: '*'
-    kind: ConfigMap
-    name: argocd-cm
-    namespace: argocd
-    jsonPointers:
-    - /data/host
-    - /data/url
-    - /stringData/host
-    - /stringData/url
   - group: 'admissionregistration.k8s.io'
     kind: ValidatingWebhookConfiguration
     name: cert-manager-webhook
