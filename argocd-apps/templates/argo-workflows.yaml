@@ -25,5 +25,5 @@ spec:
     ref: values
   syncPolicy:
     automated: {}
-    syncOptions:
-      - FailOnSharedResource=true 
+    # syncOptions:
+    #   - FailOnSharedResource=true 

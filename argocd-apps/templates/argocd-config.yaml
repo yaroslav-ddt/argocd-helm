@@ -27,11 +27,11 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  ignoreDifferences:
-  - group: '*'
-    kind: Secret
-    name: argocd-secret
-    namespace: argocd
-    jsonPointers:
-    - /data
-    - /stringData
+  # ignoreDifferences:
+  # - group: '*'
+  #   kind: Secret
+  #   name: argocd-secret
+  #   namespace: argocd
+  #   jsonPointers:
+  #   - /data
+  #   - /stringData
