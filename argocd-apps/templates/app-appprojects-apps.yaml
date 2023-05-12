@@ -1,37 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-config
+  name: apps
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"  
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
+  # Application contains othre apps
   destination:
     namespace: argocd
     server: {{ .Values.spec.destination.server }}
   project: {{ .Values.argocd.project }}
   sources:
   - repoURL: {{ .Values.spec.source.repoURL }}
-    path: argocd-config
+    path: apps
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    helm:
-      releaseName: argocd-config
-      valueFiles:
-      - $values/{{ .Values.values }}
-  - repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
-    ref: values
+    directory:
+      recurse: true
+      jsonnet: {}
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-  # ignoreDifferences:
-  # - group: '*'
-  #   kind: Secret
-  #   name: argocd-secret
-  #   namespace: argocd
-  #   jsonPointers:
-  #   - /data
-  #   - /stringData
