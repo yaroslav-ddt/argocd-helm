@@ -13,9 +13,9 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: {{ .Values.argocd.project }}
   source:
-    repoURL: https://argoproj.github.io/argo-helm
-    chart: argo-events
-    targetRevision: 2.3.3
+    repoURL: {{ .Values.spec.source.repoURL }}
+    path: argo-events
+    targetRevision: {{ .Values.spec.source.targetRevision }}
     # helm:
     #   parameters:
     #   - name: installCRDs
