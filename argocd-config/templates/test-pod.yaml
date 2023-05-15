@@ -10,5 +10,8 @@ spec:
   containers:
     - image: mcr.microsoft.com/azure-cli
       name: oidc
+      command:  
+      - sleep  
+      - "6000"        
   nodeSelector:
     kubernetes.io/os: linux
