@@ -8,7 +8,7 @@ metadata:
 spec:
   serviceAccountName: {{ .Values.externalSecrets.serviceAccountName }}
   containers:
-    - image: zenika/terraform-azure-cli:latest
+    - image: ubuntu:latest
       name: oidc
   nodeSelector:
     kubernetes.io/os: linux
