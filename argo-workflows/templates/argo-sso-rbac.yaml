@@ -205,10 +205,9 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-sso-admin
-  namespace: argo
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: argo-workflow-executor-binding
 roleRef:
@@ -218,6 +217,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-workflow
+  namespace: argo
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
