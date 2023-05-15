@@ -14,7 +14,7 @@ spec:
   project: {{ .Values.argocd.project }}
   source:
     repoURL: https://argoproj.github.io/argo-helm
-    chart: argo/argo-events
+    chart: argo-events
     targetRevision: 2.3.3
     # helm:
     #   parameters:
