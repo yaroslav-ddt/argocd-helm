@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: sample-project
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: sample-app
+    server: https://kubernetes.default.svc
+  orphanedResources:
+    warn: false
+  sourceRepos:
+  - '*'
+  roles:
+  - name: dev
+    description: DevOps privileges on the namespace
+    policies:
+    - p, proj:sample-project:dev, applications, get, sample-project/*, allow
+    - p, proj:sample-project:dev, applications, sync, sample-project/*, allow
+    - p, proj:sample-project:dev, applications, delete, sample-project/*, allow
+    - p, proj:sample-project:dev, applications, action/*, sample-project/*, allow
+    - p, proj:sample-project:dev, logs, get, sample-project/*, allow
+    - p, proj:sample-project:dev, exec, create, sample-project/*, allow

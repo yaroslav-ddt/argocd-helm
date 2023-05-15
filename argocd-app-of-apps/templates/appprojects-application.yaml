@@ -15,7 +15,7 @@ spec:
   project: {{ .Values.argocd.project }}
   sources:
   - repoURL: {{ .Values.spec.source.repoURL }}
-    path: argocd-appprojects
+    path: appprojects
     targetRevision: {{ .Values.spec.source.targetRevision }}
     directory:
       recurse: true
