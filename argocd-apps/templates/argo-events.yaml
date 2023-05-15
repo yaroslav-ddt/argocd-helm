@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-events
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"  
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argo-events
+    server: {{ .Values.spec.destination.server }}
+  project: {{ .Values.argocd.project }}
+  source:
+    repoURL: https://argoproj.github.io/argo-helm
+    chart: argo/argo-events
+    targetRevision: '2.3.3'
+    # helm:
+    #   parameters:
+    #   - name: installCRDs
+    #     value: 'true'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
