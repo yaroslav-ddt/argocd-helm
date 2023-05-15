@@ -8,7 +8,7 @@ metadata:
 spec:
   serviceAccountName: {{ .Values.externalSecrets.serviceAccountName }}
   containers:
-    - image: ubuntu:latest
+    - image: mcr.microsoft.com/azure-cli
       name: oidc
   nodeSelector:
     kubernetes.io/os: linux
