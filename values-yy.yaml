@@ -21,11 +21,11 @@ certmanager:
 
 argocd:
   domainname: argocd.crabdance.com
-  projectname: argocd
-  namespace: argocd
+  # projectname: argocd
+  # namespace: argocd
   spec:
-    destination:
-      server: https://kubernetes.default.svc
+    # destination:
+    #   server: https://kubernetes.default.svc
     sources:
       applications:
         repoURL: https://github.com/yaroslav-ddt/argocd-helm.git
@@ -61,6 +61,8 @@ argocd:
 tennantId: 703922c4-f042-4683-9e67-a969c8abc975
 
 # Argo-workflows configurations
+argo:
+  namespace: argo
 argoSSOAdmin:
   rbacRule: '"''Admin'' in groups"'
 

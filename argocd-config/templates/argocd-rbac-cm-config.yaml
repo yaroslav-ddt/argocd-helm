@@ -10,4 +10,4 @@ metadata:
 data:
   policy.csv: | {{ .Values.argocd.rbac.policy.csv | trim | nindent 4 }}
   policy.default: {{ .Values.argocd.rbac.policy.default }}
-  scopes: {{ .Values.argocd.rbac.scopes }}
+  scopes: '{{ .Values.argocd.rbac.scopes }}'

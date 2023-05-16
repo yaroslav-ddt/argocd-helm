@@ -1,27 +1,17 @@
 {{/* Defining argocd namespace */}}
 {{- define "argocd.namespace" -}}
-{{- if .Values.argocd.namespace -}}
-{{ .Values.argocd.namespace }}
-{{- else -}}
-argocd
+{{-   $value := default .Values.argocd.namespace "argocd" -}}
+{{-   $value -}}
 {{- end -}}
-{{- end -}}
-
 
 {{/* Defining argocd k8s destination server*/}}
 {{- define "argocd.destination.server" -}}
-{{- if .Values.argocd.spec.destination.server -}}
-{{ .Values.argocd.spec.destination.server }}
-{{- else -}}
-https://kubernetes.default.svc
-{{- end -}}
+{{-   $value := default .Values.argocd.spec.destination.server "https://kubernetes.default.svc" -}}
+{{-   $value -}}
 {{- end -}}
 
 {{/* Defining argo namespace */}}
 {{- define "argo.namespace" -}}
-{{- if .Values.argo.namespace -}}
-{{ .Values.argo.namespace }}
-{{- else -}}
-argo
-{{- end -}}
+{{-   $value := default .Values.argo.namespace "argo" -}}
+{{-   $value -}}
 {{- end -}}
