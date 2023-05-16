@@ -94,5 +94,5 @@ argo-workflows:
       ## set to true instead:
       # useSDKCreds: true
       accountKeySecret:
-        name: argo-sso-secret
+        name: artifacts-secret
         key: storageaccount-access-key
