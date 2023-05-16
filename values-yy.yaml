@@ -41,7 +41,6 @@ argocd:
     clientSecret: argocd-sso-secret:oidc-azure-clientSecret
     requestedScopes:
         - openid
-        - profile
         - email
 
   # argocd rbac
