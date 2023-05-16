@@ -83,7 +83,7 @@ argo-workflows:
     azure: 
       endpoint: https://cdpargoaksyy.blob.core.windows.net
       container: argologs
-      blob: "{{workflow.name}}/{{pod.name}}"
+      # blob: "{{workflow.name}}/{{pod.name}}"
       ## accountKeySecret is a secret selector.
       ## It references the k8s secret named 'my-azure-storage-credentials'.
       ## This secret is expected to have have the key 'account-access-key',
