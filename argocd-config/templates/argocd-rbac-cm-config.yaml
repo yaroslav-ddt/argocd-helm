@@ -6,7 +6,8 @@ metadata:
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-rbac-cm
-  namespace: argocd
+  namespace: {{ include "argocd.namespace" . }}
 data:
-  policy.csv: | {{ .Values.rbac.policy.csv | trim | nindent 4 }}
-  policy.default: {{ .Values.rbac.policy.default }}
+  policy.csv: | {{ .Values.argocd.rbac.policy.csv | trim | nindent 4 }}
+  policy.default: {{ .Values.argocd.rbac.policy.default }}
+  scopes: {{ .Values.argocd.rbac.scopes }}

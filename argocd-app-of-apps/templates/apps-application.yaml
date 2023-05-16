@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: apps
-  namespace: argocd
+  namespace: {{ include "argocd.namespace" .}}
   annotations:
     argocd.argoproj.io/sync-wave: "2"  
   finalizers:
@@ -10,13 +10,13 @@ metadata:
 spec:
   # Application contains othre apps
   destination:
-    namespace: argocd
-    server: {{ .Values.spec.destination.server }}
-  project: {{ .Values.argocd.project }}
+    namespace: {{ include "argocd.namespace" .}}
+    server: {{ include "argocd.destination.server" . }}
+  project: {{ include "argocd.projectname" . }}
   sources:
-  - repoURL: {{ .Values.spec.source.repoURL }}
+  - repoURL: {{ .Values.argocd.spec.sources.applications.repoURL }}
     path: apps
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    targetRevision: {{ .Values.argocd.spec.sources.applications.targetRevision }}
     directory:
       recurse: true
       jsonnet: {}

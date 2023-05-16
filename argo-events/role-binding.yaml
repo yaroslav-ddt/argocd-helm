@@ -1,4 +1,5 @@
 ---
+# bind the argo-events-aggregate role to argo-sso-admin
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -13,6 +14,14 @@ subjects:
   namespace: argo
 
 ---
+# binding argo-workflow-executor-role to argo service account in argo-events allow to run pods
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-05-16T16:44:02Z"
+  name: argo
+  namespace: argo-events
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -23,5 +32,5 @@ roleRef:
   name: argo-workflow-executor-role
 subjects:
 - kind: ServiceAccount
-  name: default
+  name: argo
   namespace: argo-events

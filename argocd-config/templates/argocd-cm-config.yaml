@@ -6,14 +6,14 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-cm
-  namespace: argocd
+  namespace: {{ include "argocd.namespace" . }}
 data:
   oidc.config: |
     name: Azure
     issuer: https://login.microsoftonline.com/{{- .Values.tennantId -}}/v2.0
-    {{ $clientID := .Values.oidc.clientID -}}
+    {{ $clientID := .Values.argocd.oidc.clientID -}}
     clientID: {{ printf "$%s" $clientID }}
-    {{ $clientSecret := .Values.oidc.clientSecret -}}    
+    {{ $clientSecret := .Values.argocd.oidc.clientSecret -}}    
     clientSecret: {{ printf "$%s" $clientSecret }}
-    requestedScopes: {{ .Values.oidc.requestedScopes }}
+    requestedScopes: {{ .Values.argocd.oidc.requestedScopes }}
   url: https://{{- .Values.argocd.domainname -}}/

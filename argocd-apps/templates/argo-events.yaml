@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: argo-events
-  namespace: argocd
+  namespace: {{ include "argocd.namespace" . }}
   annotations:
     argocd.argoproj.io/sync-wave: "2"  
   finalizers:
@@ -10,12 +10,12 @@ metadata:
 spec:
   destination:
     namespace: argo-events
-    server: {{ .Values.spec.destination.server }}
-  project: {{ .Values.argocd.project }}
+    server: {{ include "argocd.destination.server" . }}
+  project: {{ include "argocd.projectname" . }}
   source:
-    repoURL: {{ .Values.spec.source.repoURL }}
+    repoURL: {{ .Values.argocd.spec.sources.applications.repoURL }}
     path: argo-events
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    targetRevision: {{ .Values.argocd.spec.sources.applications.targetRevision }}
     # helm:
     #   parameters:
     #   - name: installCRDs

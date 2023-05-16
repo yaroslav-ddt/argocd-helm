@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: argocd-apps
-  namespace: argocd
+  namespace: {{ include "argocd.namespace" .}}
   annotations:
     argocd.argoproj.io/sync-wave: "2"  
   finalizers:
@@ -10,19 +10,19 @@ metadata:
 spec:
   # Application contains othre apps
   destination:
-    namespace: argocd
-    server: {{ .Values.spec.destination.server }}
-  project: {{ .Values.argocd.project }}
+    namespace: {{ include "argocd.namespace" .}}
+    server: {{ include "argocd.destination.server" . }}
+  project: {{ include "argocd.projectname" . }}
   sources:
-  - repoURL: {{ .Values.spec.source.repoURL }}
+  - repoURL: {{ .Values.argocd.spec.sources.applications.repoURL }}
     path: argocd-apps
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    targetRevision: {{ .Values.argocd.spec.sources.applications.targetRevision }}
     helm:
       releaseName: argocd-apps
       valueFiles:
-      - $values/{{ .Values.values }}    
-  - repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+      - $values/{{ .Values.argocd.spec.sources.values.valuesfile }}    
+  - repoURL: {{ .Values.argocd.spec.sources.values.repoURL }}
+    targetRevision: {{ .Values.argocd.spec.sources.values.targetRevision }}
     ref: values
     automated:
       prune: true

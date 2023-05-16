@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: ingress-nginx
-  namespace: argocd
+  namespace: {{ include "argocd.namespace" . }}
   annotations:
     argocd.argoproj.io/sync-wave: "1"
   finalizers:
@@ -10,8 +10,8 @@ metadata:
 spec:
   destination:
     namespace: ingress-nginx
-    server: {{ .Values.spec.destination.server }}
-  project: {{ .Values.argocd.project }}
+    server: {{ include "argocd.destination.server" . }}
+  project: {{ include "argocd.projectname" . }}
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
     chart: ingress-nginx
@@ -27,5 +27,7 @@ spec:
     automated:
       prune: false
       selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
 
 

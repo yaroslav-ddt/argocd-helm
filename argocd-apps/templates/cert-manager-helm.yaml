@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cert-manager
-  namespace: argocd
+  namespace: {{ include "argocd.namespace" . }}
   annotations:
     argocd.argoproj.io/sync-wave: "1"  
   finalizers:
@@ -10,8 +10,8 @@ metadata:
 spec:
   destination:
     namespace: cert-manager
-    server: {{ .Values.spec.destination.server }}
-  project: {{ .Values.argocd.project }}
+    server: {{ include "argocd.destination.server" . }}
+  project: {{ include "argocd.projectname" . }}
   source:
     repoURL: https://charts.jetstack.io
     chart: cert-manager
@@ -31,3 +31,7 @@ spec:
   - group: 'admissionregistration.k8s.io'
     kind: ValidatingWebhookConfiguration
     name: cert-manager-webhook
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true

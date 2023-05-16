@@ -2,8 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   generation: 1
-  name: argocd
-  namespace: argocd
+  name: {{ include "argocd.projectname" . }}
+  namespace: {{ include "argocd.namespace" . }}
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
 spec:

@@ -20,28 +20,43 @@ certmanager:
         name: letsencrypt
 
 argocd:
-  domainname: argocd-yy.jumpingcrab.com
-  project: argocd
+  domainname: argocd.crabdance.com
+  projectname: argocd
+  namespace: argocd
+  spec:
+    destination:
+      server: https://kubernetes.default.svc
+    sources:
+      applications:
+        repoURL: https://github.com/yaroslav-ddt/argocd-helm.git
+        targetRevision: HEAD
+      values:
+        repoURL: https://github.com/yaroslav-ddt/argocd-helm.git
+        targetRevision: HEAD
+        valuesfile: values-yy.yaml
+  # OIDC config
+  oidc:
+    # the names of clienId and clientSecret secrets in the key Vault
+    clientID: argocd-sso-secret:oidc-azure-clientId
+    clientSecret: argocd-sso-secret:oidc-azure-clientSecret
+    requestedScopes:
+        - openid
+        - profile
+        - email
 
-oidc:
-  # the names of clienId and clientSecret secrets in the key Vault
-  clientID: argocd-sso-secret:oidc-azure-clientId
-  clientSecret: argocd-sso-secret:oidc-azure-clientSecret
-  requestedScopes:
-       - openid
-       - email
-
-# argocd rbac
-rbac:
-  policy:
-    csv: |
-      p, role:ops, applications, *, */*, allow
-      p, role:ops, logs, get, */*, allow
-      p, role:ops, exec, create, */*, allow
-      p, role:ops, clusters, get, *, allow
-      p, role:ops, repositories, get, *, allow
-      g, 736e6f41-ec48-48bc-a524-ff85d34a5b4d, role:admin
-    default: role:readonly
+  # argocd rbac
+  rbac:
+    policy:
+      csv: |
+        p, role:ops, applications, *, */*, allow
+        p, role:ops, logs, get, */*, allow
+        p, role:ops, exec, create, */*, allow
+        p, role:ops, clusters, get, *, allow
+        p, role:ops, repositories, get, *, allow
+        g, Admin, role:admin
+      default: role:readonly
+    scopes: '[roles, email]'
+# Admin group 736e6f41-ec48-48bc-a524-ff85d34a5b4d
 
 tennantId: 703922c4-f042-4683-9e67-a969c8abc975
 

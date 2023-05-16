@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: workload-identity-webhook
-  namespace: argocd
+  namespace: {{ include "argocd.namespace" . }}
   annotations:
     argocd.argoproj.io/sync-wave: "1"  
   finalizers:
@@ -10,8 +10,8 @@ metadata:
 spec:
   destination:
     namespace: azure-workload-identity-system
-    server: {{ .Values.spec.destination.server }}
-  project: {{ .Values.argocd.project }}
+    server: {{ include "argocd.destination.server" . }}
+  project: {{ include "argocd.projectname" . }}
   source:
     repoURL: https://azure.github.io/azure-workload-identity/charts
     chart: workload-identity-webhook
@@ -23,3 +23,5 @@ spec:
     automated:
       prune: false
       selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
