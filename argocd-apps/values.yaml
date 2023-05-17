@@ -13,36 +13,3 @@ argocd:
         repoURL: https://github.com/yaroslav-ddt/argocd-helm.git
         targetRevision: HEAD
         valuesfile: values-yy.yaml
-  oidc:
-    # the names of clienId and clientSecret secrets in the key Vault
-    clientID: oidc-azure-clientId
-    clientSecret: oidc-azure-clientSecret
-    requestedScopes:
-        - openid
-        - email
-
-  rbac:
-    policy:
-      csv: |
-        p, role:ops, applications, *, */*, allow
-        p, role:ops, logs, get, */*, allow
-        p, role:ops, exec, create, */*, allow
-        p, role:ops, clusters, get, *, allow
-        p, role:ops, repositories, get, *, allow
-        g, 736e6f41-0000-0000-0000-ff85d34a5b4d, role:admin
-      default: role:readonly
-
-certmanager:
-  metadata:
-    name: letsencrypt
-  spec:
-    acme:
-      # staging https://acme-staging-v02.api.letsencrypt.org/directory 
-      # production https://acme-v02.api.letsencrypt.org/directory  
-      server: https://acme-v02.api.letsencrypt.org/directory
-      email: yy@datainsights.de
-      privateKeySecretRef:
-        name: letsencrypt
-
-
-tennantId: 703922c4-0000-0000-0000-a969c8abc975
