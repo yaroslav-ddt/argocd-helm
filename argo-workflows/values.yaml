@@ -55,21 +55,21 @@ argo-workflows:
       hosts: [] # from values
       ingressClassName: "nginx"
       tls: []
-    sso:
-      issuer: https://login.microsoftonline.com/703922c4-f042-4683-9e67-a969c8abc975/v2.0 # Has to be configured
-      redirectUrl: https://argo-workflows-yy.jumpingcrab.com/oauth2/callback
-      clientId:
-        name: argo-sso-secret
-        key: oidc-azure-clientId
-      clientSecret:
-        name: argo-sso-secret
-        key: oidc-azure-clientSecret
-      scopes:
-        - openid      
-        - email
-      customGroupClaimName: roles
-      rbac:
-        enabled: true
+    # sso:
+    #   issuer: https://login.microsoftonline.com/703922c4-f042-4683-9e67-a969c8abc975/v2.0 # Has to be configured
+    #   redirectUrl: https://argo-workflows-yy.jumpingcrab.com/oauth2/callback
+    #   clientId:
+    #     name: argo-sso-secret
+    #     key: oidc-azure-clientId
+    #   clientSecret:
+    #     name: argo-sso-secret
+    #     key: oidc-azure-clientSecret
+    #   scopes:
+    #     - openid      
+    #     - email
+    #   customGroupClaimName: roles
+    #   rbac:
+    #     enabled: true
     logging:
       # -- Set the logging level (one of: `debug`, `info`, `warn`, `error`)
       level: info
