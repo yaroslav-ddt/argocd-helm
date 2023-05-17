@@ -24,6 +24,7 @@ spec:
   - repoURL: {{ .Values.argocd.spec.sources.values.repoURL }}
     targetRevision: {{ .Values.argocd.spec.sources.values.targetRevision }}
     ref: values
+  syncPolicy:
     automated:
       prune: true
       selfHeal: true
