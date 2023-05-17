@@ -1,0 +1,11 @@
+argocd:
+  domainname: argocd.crabdance.com
+
+tennantId: 703922c4-0000-0000-0000-a969c8abc975
+
+externalSecrets:
+  serviceAccountName: external-secrets-sa
+  secretStoreVaultUrl: "https://cdpargo-aks-yy-kv.vault.azure.net" 
+  WorkloadIdentity:
+    clientId: 408e4354-0000-0000-0000-c5f9db52ff68
+    tenantId: 703922c4-0000-0000-0000-a969c8abc975
