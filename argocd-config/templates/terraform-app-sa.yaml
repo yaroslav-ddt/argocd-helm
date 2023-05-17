@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    azure.workload.identity/client-id: cb1329e4-da7b-4ee0-9f5b-5d192bf8176d
+    azure.workload.identity/tenant-id: 703922c4-f042-4683-9e67-a969c8abc975
+  name: terraform-app-sa
+  namespace: {{ include "argocd.namespace" . }}

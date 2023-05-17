@@ -6,7 +6,7 @@ metadata:
   labels:
     azure.workload.identity/use: "true"
 spec:
-  serviceAccountName: external-secrets-sa
+  serviceAccountName: terraform-app-sa
   containers:
     - image: mcr.microsoft.com/azure-cli
       name: oidc
