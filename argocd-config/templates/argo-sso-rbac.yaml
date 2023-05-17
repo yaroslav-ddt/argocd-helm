@@ -1,3 +1,4 @@
+# default sa for logged in user
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -8,16 +9,18 @@ metadata:
 secrets:
   - name: argo-sso-default-token
 ---
+# admin sa for logged in user
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: argo-sso-admin
   annotations:
-    workflows.argoproj.io/rbac-rule: {{ .Values.argoSSOAdmin.rbacRule }}   #"'AppRole' in groups" # Has to be changed!!
-    workflows.argoproj.io/rbac-rule-precedence: "100"
+    workflows.argoproj.io/rbac-rule: {{ .Values.argo.argoSSOAdmin.rbacRule }}   #"'AppRole' in groups" # Has to be changed!!
+    workflows.argoproj.io/rbac-rule-precedence: "100" # the highest precedence
 secrets:
   - name: argo-sso-admin-token
 ---
+# sa for workflow-controller
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -25,6 +28,7 @@ metadata:
 secrets:
   - name: argo-workflow-token
 ---
+# k8s does not create token automatically
 apiVersion: v1
 kind: Secret
 type: kubernetes.io/service-account-token
@@ -33,6 +37,7 @@ metadata:
   annotations:
     kubernetes.io/service-account.name: argo-sso-default
 ---
+# k8s does not create token automatically
 apiVersion: v1
 kind: Secret
 type: kubernetes.io/service-account-token
@@ -41,6 +46,7 @@ metadata:
   annotations:
     kubernetes.io/service-account.name: argo-sso-admin
 ---
+# k8s does not create token automatically
 apiVersion: v1
 kind: Secret
 type: kubernetes.io/service-account-token
@@ -49,6 +55,7 @@ metadata:
   annotations:
     kubernetes.io/service-account.name: argo-workflow
 ---
+# ClusterRole for default sso account
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -64,6 +71,7 @@ rules:
   - list
   - watch
 ---
+# ClusterRole for normal user
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -142,6 +150,7 @@ rules:
   - get
   - delete
 ---
+# Cluster role for the workflow executor
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -168,7 +177,7 @@ rules:
   verbs:
   - get
 ---
-# Additional Role for Admins to access secrets from all namespaces. This is needed to access logs.
+# Role for Admins to access secrets in all namespaces
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:

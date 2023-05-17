@@ -62,8 +62,8 @@ tennantId: 703922c4-f042-4683-9e67-a969c8abc975
 # Argo-workflows configurations
 argo:
   namespace: argo
-argoSSOAdmin:
-  rbacRule: '"''Admin'' in groups"'
+  argoSSOAdmin:
+    rbacRule: '"''Admin'' in groups"'
 
 argo-workflows:
   server:
