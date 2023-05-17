@@ -68,7 +68,6 @@ argo-workflows:
         - openid      
         - email
       customGroupClaimName: roles
-      unused.userInfoPath: https://graph.microsoft.com/v1.0/me/getMemberGroups
       rbac:
         enabled: true
     logging:

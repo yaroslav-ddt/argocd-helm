@@ -1,0 +1,27 @@
+apiVersion: v1
+data:
+    sso:
+      issuer: https://login.microsoftonline.com/703922c4-f042-4683-9e67-a969c8abc975/v2.0 # Has to be configured
+      redirectUrl: https://argo-workflows-yy.jumpingcrab.com/oauth2/callback
+      clientId:
+        name: argo-sso-secret
+        key: oidc-azure-clientId
+      clientSecret:
+        name: argo-sso-secret
+        key: oidc-azure-clientSecret
+      scopes:
+        - openid      
+        - email
+      customGroupClaimName: roles
+      rbac:
+        enabled: true
+kind: ConfigMap
+metadata:
+  annotations:
+  labels:
+    app.kubernetes.io/component: workflow-controller
+    app.kubernetes.io/instance: argo-workflows
+    app.kubernetes.io/name: argo-workflows-cm
+    app.kubernetes.io/part-of: argo-workflows
+  name: argo-workflow-controller-sso-configmap
+  namespace: argo
