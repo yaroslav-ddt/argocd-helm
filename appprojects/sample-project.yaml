@@ -24,3 +24,6 @@ spec:
     - p, proj:sample-project:dev, applications, action/*, sample-project/*, allow
     - p, proj:sample-project:dev, logs, get, sample-project/*, allow
     - p, proj:sample-project:dev, exec, create, sample-project/*, allow
+    groups:
+    - Ops
+
