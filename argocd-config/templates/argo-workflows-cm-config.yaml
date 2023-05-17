@@ -2,7 +2,7 @@ apiVersion: v1
 data:
   conig: |
     sso:
-      issuer: https://login.microsoftonline.com/703922c4-f042-4683-9e67-a969c8abc975/v2.0 # Has to be configured
+      issuer: https://login.microsoftonline.com/703922c4-f042-4683-9e67-a969c8abc975/v2.0
       redirectUrl: https://argo-workflows-yy.jumpingcrab.com/oauth2/callback
       clientId:
         name: argo-sso-secret
