@@ -2,6 +2,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-sso-default
   annotations:
     workflows.argoproj.io/rbac-rule: "true"
@@ -13,6 +14,7 @@ secrets:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-sso-admin
   annotations:
     workflows.argoproj.io/rbac-rule: {{ .Values.argo.argoSSOAdmin.rbacRule }}   #"'AppRole' in groups" # Has to be changed!!
@@ -24,6 +26,7 @@ secrets:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-workflow
 secrets:
   - name: argo-workflow-token
@@ -33,6 +36,7 @@ apiVersion: v1
 kind: Secret
 type: kubernetes.io/service-account-token
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-sso-default-token
   annotations:
     kubernetes.io/service-account.name: argo-sso-default
@@ -42,6 +46,7 @@ apiVersion: v1
 kind: Secret
 type: kubernetes.io/service-account-token
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-sso-admin-token
   annotations:
     kubernetes.io/service-account.name: argo-sso-admin
@@ -51,6 +56,7 @@ apiVersion: v1
 kind: Secret
 type: kubernetes.io/service-account-token
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-workflow-token
   annotations:
     kubernetes.io/service-account.name: argo-workflow
@@ -59,6 +65,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-sso-default-cluster-role
 rules:
 - apiGroups:
@@ -75,6 +82,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-sso-role
 rules:
 - apiGroups:
@@ -154,6 +162,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-workflow-executor-role
 # https://argoproj.github.io/argo-workflows/workflow-rbac/
 rules:
@@ -181,6 +190,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-secrets-role
 rules:
 - apiGroups:
@@ -193,6 +203,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-sso-default-cluster-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -201,11 +212,12 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-sso-default
-  namespace: argo
+  namespace: {{ include "argo.namespace" . }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-sso-admin-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -214,11 +226,12 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-sso-admin
-  namespace: argo
+  namespace: {{ include "argo.namespace" . }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-workflow-executor-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -227,11 +240,12 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-workflow
-  namespace: argo
+  namespace: {{ include "argo.namespace" . }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-sso-admin-secret-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -240,11 +254,12 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-sso-admin
-  namespace: argo
+  namespace: {{ include "argo.namespace" . }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  namespace: {{ include "argo.namespace" . }}
   name: argo-sso-admin-argo-sso-role-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -253,4 +268,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-sso-admin
-  namespace: argo
+  namespace: {{ include "argo.namespace" . }}
