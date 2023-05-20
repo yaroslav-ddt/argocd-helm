@@ -29,3 +29,10 @@ spec:
     - CreateNamespace=true
     # syncOptions:
     #   - FailOnSharedResource=true 
+  ignoreDifferences:
+  - group: '*'
+    kind: ConfigMap
+    name: argo-workflow-controller-configmap
+    namespace: argo
+    jsonPointers:
+    - /data
