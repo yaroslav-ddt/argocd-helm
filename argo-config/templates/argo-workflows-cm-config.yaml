@@ -35,5 +35,5 @@ metadata:
     app.kubernetes.io/instance: argo-workflows
     app.kubernetes.io/name: argo-workflows-cm
     app.kubernetes.io/part-of: argo-workflows
-  name: argo-workflow-controller-artifact-configmap
+  name: argo-workflow-controller-configmap
   namespace: argo
