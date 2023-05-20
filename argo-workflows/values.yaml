@@ -10,9 +10,9 @@ argo-workflows:
     name: workflow-controller
     serviceAccount:
       # -- Create a service account for the controller
-      create: false
+      create: true
       # -- Service account name
-      name: "argo-workflow"
+      name: "argo-controller"
       # -- Annotations applied to created service account
       annotations: {}
     workflowNamespaces:
@@ -31,9 +31,12 @@ argo-workflows:
   server:
     serviceAccount:
       create: true
-      name: "argo"
+      name: "argo-server"
+    rbac:
+      # -- Adds Role and RoleBinding for the server.
+      create: true   
     replicas: 1
-      
+   
     extraEnv:
       - name: SSO_DELEGATE_RBAC_TO_NAMESPACE
         value: "true"
