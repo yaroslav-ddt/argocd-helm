@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-ingress
+  namespace: {{ include "argocd.namespace" . }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.certmanager.metadata.name }}
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.argocd.domainname }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: example
+            port:
+              name: http
+  tls:
+  - hosts:
+    - {{ .Values.argocd.domainname }}
+    secretName: argocd-secret # do not change, this is provided by Argo CD
