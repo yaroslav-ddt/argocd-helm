@@ -2,9 +2,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argocd-server-ingress
-  namespace: {{ include "argocd.namespace" . }}
+  # namespace: {{ include "argocd.namespace" . }}
   annotations:
-    cert-manager.io/cluster-issuer: {{ .Values.certmanager.metadata.name }}
+    cert-manager.io/cluster-issuer: letsencrypt
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
@@ -12,7 +12,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ .Values.argocd.domainname }}
+  - host: argo-events-yy.jumpingcrab.com
     http:
       paths:
       - path: /
@@ -21,8 +21,8 @@ spec:
           service:
             name: example
             port:
-              name: http
+              number: 12000
   tls:
   - hosts:
-    - {{ .Values.argocd.domainname }}
-    secretName: argocd-secret # do not change, this is provided by Argo CD
+    - argo-events-yy.jumpingcrab.com
+    secretName: argo-events-secret # do not change, this is provided by Argo CD

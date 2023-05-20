@@ -17,11 +17,25 @@ data:
       customGroupClaimName: roles
       rbac:
         enabled: true
+kind: ConfigMap
+metadata:
+  annotations:
+  labels:
+    app.kubernetes.io/component: workflow-controller
+    app.kubernetes.io/instance: argo-workflows
+    app.kubernetes.io/name: argo-workflows-cm
+    app.kubernetes.io/part-of: argo-workflows
+  name: argo-workflow-controller-sso-configmap
+  namespace: argo
+---
+apiVersion: v1
+data:
+  config: |
     artifactRepository:
-        # -- Archive the main container logs as an artifact
-        archiveLogs: true
-        # @default -- See [values.yaml]
-        azure: 
+      # -- Archive the main container logs as an artifact
+      archiveLogs: true
+      # @default -- See [values.yaml]
+      azure: 
         endpoint: https://cdpargoaksyy.blob.core.windows.net
         container: argologs
         accountKeySecret:
@@ -35,5 +49,5 @@ metadata:
     app.kubernetes.io/instance: argo-workflows
     app.kubernetes.io/name: argo-workflows-cm
     app.kubernetes.io/part-of: argo-workflows
-  name: argo-workflow-controller-configmap
+  name: argo-workflow-controller-artifact-configmap
   namespace: argo
