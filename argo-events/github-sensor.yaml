@@ -81,5 +81,4 @@ spec:
               dest: metadata.name
               operation: append
       retryStrategy:
-        steps: 3
-        
+        steps: 3        
