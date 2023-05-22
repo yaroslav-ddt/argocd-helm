@@ -22,6 +22,6 @@ spec:
             name: example
             port:
               number: 12000
-  tls:
-  - hosts:
-    - argo-events-yy.jumpingcrab.com
+  # tls:
+  # - hosts:
+  #   - argo-events-yy.jumpingcrab.com
