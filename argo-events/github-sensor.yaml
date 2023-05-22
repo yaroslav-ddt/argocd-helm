@@ -3,8 +3,8 @@ kind: Sensor
 metadata:
   name: github
 spec:
-  # template:
-  #   serviceAccountName: operate-workflow-sa
+  template:
+    serviceAccountName: operate-workflow-sa
   dependencies:
     - name: test-dep
       eventSourceName: github
@@ -82,4 +82,3 @@ spec:
               operation: append
       retryStrategy:
         steps: 3
-        
