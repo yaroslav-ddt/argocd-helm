@@ -16,7 +16,7 @@ spec:
   github:
     example:
       repositories:
-        - owner: yaroslav-ddt
+        - owner: yaroslav-ddi
           names:
             - argocd-helm
       # Github application auth. Instead of using personal token `apiToken` use app PEM            
