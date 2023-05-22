@@ -15,7 +15,7 @@ spec:
   - host: argo-events-yy.jumpingcrab.com
     http:
       paths:
-      - path: /
+      - path: /push
         pathType: Prefix
         backend:
           service:
