@@ -57,8 +57,8 @@ spec:
                       artifacts:
                         - name: tfconfig
                           path: /tfconfig
-                  - name: azcli                
-                    containers:
+                  - name: azcli
+                    container:
                       - image: mcr.microsoft.com/azure-cli
                         name: oidc
                         command:  
@@ -71,4 +71,3 @@ spec:
               dest: spec.arguments.parameters.0.value
       retryStrategy:
         steps: 3
-        
