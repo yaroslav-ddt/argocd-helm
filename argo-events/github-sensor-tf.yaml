@@ -60,9 +60,9 @@ spec:
                           path: /tfconfig
                   - name: azcli
                     container:
-                      - image: mcr.microsoft.com/azure-cli
-                        name: oidc
-                        command:  
+                      image: mcr.microsoft.com/azure-cli
+                      name: oidc
+                      command:  
                         - sleep  
                         - "6000"        
                   - name: main
