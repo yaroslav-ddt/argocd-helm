@@ -28,7 +28,9 @@ spec:
               kind: Workflow
               metadata:
                 generateName: github-
-              spec:
+                labels:
+                  azure.workload.identity/use: "true"                
+              spec:              
                 entrypoint: whalesay
                 arguments:
                   parameters:
@@ -54,6 +56,14 @@ spec:
                       artifacts:
                         - name: tfconfig
                           path: /tfconfig
+                  - name: az-cli
+                    serviceAccountName: terraform-app-sa                  
+                    containers:
+                      - image: mcr.microsoft.com/azure-cli
+                        name: oidc
+                        command:  
+                        - sleep  
+                        - "6000"        
           parameters:
             - src:
                 dependencyName: test-dep
