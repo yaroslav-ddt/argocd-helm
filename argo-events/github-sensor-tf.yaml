@@ -29,9 +29,6 @@ spec:
               metadata:
                 generateName: github-              
               spec:
-                workflowMetadata:
-                  labels:
-                    azure.workload.identity/use: "true"                           
                 entrypoint: main 
                 arguments:
                   parameters:
@@ -60,6 +57,9 @@ spec:
                         - name: tfconfig
                           path: /tfconfig
                   - name: azcli
+                    metadata:
+                      labels:
+                        azure.workload.identity/use: "true"                     
                     container:
                       image: mcr.microsoft.com/azure-cli
                       name: oidc
