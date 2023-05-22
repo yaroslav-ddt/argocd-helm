@@ -18,21 +18,17 @@ spec:
             type: string
             value:
               - push
-          - path: body.action
+          - path: body.ref
             type: string
-            value:
-              - opened
-              - edited
-              - reopened
-              - synchronize
-          - path: body.pull_request.state
+          - path: body.repository
             type: string
             value:
               - open
-          - path: body.pull_request.base.ref
+          - path: body.pusher
             type: string
             value:
-              - master
+              - date
+              - name
   triggers:
     - template:
         name: github-workflow-trigger
@@ -48,37 +44,37 @@ spec:
                 entrypoint: whalesay
                 arguments:
                   parameters:
-                    - name: pr-title
-                    - name: pr-number
+                    - name: pr-ref
+                    - name: pr-repo
                     - name: short-sha
                 templates:
                   - name: whalesay
                     inputs:
                       parameters:
-                        - name: pr-title
-                        - name: pr-number
+                        - name: pr-ref
+                        - name: pr-repo
                         - name: short-sha
                     container:
                       image: docker/whalesay:latest
                       command: [cowsay]
-                      args: ["{{inputs.parameters.pr-title}}"]
+                      args: ["{{inputs.parameters.pr-ref}}"]
           parameters:
             - src:
                 dependencyName: test-dep
-                dataKey: body.pull_request.title
+                dataKey: body.ref
               dest: spec.arguments.parameters.0.value
             - src:
                 dependencyName: test-dep
-                dataKey: body.pull_request.number
+                dataKey: body.repository
               dest: spec.arguments.parameters.1.value
             - src:
                 dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.pull_request.head.sha | substr 0 7 }}"
+                dataTemplate: "{{ .Input.body.pusher.date }}"
               dest: spec.arguments.parameters.2.value
             # Append pull request number and short sha to dynamically assign workflow name <github-21500-2c065a>
             - src:
                 dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.pull_request.number }}-{{ .Input.body.pull_request.head.sha | substr 0 7 }}"
+                dataTemplate: "{{ .Input.body.pusher.name }}"
               dest: metadata.name
               operation: append
       retryStrategy:
