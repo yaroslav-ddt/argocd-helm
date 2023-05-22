@@ -32,13 +32,11 @@ spec:
                 entrypoint: whalesay
                 arguments:
                   parameters:
-                    - name: app-name
                     - name: repo-url
                 templates:
                   - name: whalesay
                     inputs:
                       parameters:
-                        - name: app-name
                         - name: repo-url
                       artifacts:
                         - git:
@@ -60,7 +58,6 @@ spec:
             - src:
                 dependencyName: test-dep
                 dataKey: body.repository.html_url
-              dest: spec.arguments.parameters.1.value
+              dest: spec.arguments.parameters.0.value
       retryStrategy:
         steps: 3
-        
