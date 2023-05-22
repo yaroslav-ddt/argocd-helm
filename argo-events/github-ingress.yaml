@@ -22,6 +22,16 @@ spec:
             name: github-eventsource-svc
             port:
               number: 12000
+  - host: argo-events-yy.jumpingcrab.com
+    http:
+      paths:
+      - path: /example
+        pathType: Prefix
+        backend:
+          service:
+            name: webhook
+            port:
+              number: 13000
   tls: 
   - hosts:
     - argo-events-yy.jumpingcrab.com
