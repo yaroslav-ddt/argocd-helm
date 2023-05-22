@@ -32,6 +32,7 @@ spec:
                   azure.workload.identity/use: "true"                
               spec:              
                 entrypoint: whalesay
+                serviceAccountName: terraform-app-sa  
                 arguments:
                   parameters:
                     - name: repo-url
@@ -56,8 +57,7 @@ spec:
                       artifacts:
                         - name: tfconfig
                           path: /tfconfig
-                  - name: azcli
-                    serviceAccountName: terraform-app-sa                  
+                  - name: azcli                
                     containers:
                       - image: mcr.microsoft.com/azure-cli
                         name: oidc
