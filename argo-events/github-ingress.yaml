@@ -19,7 +19,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: example
+            name: github-eventsource-svc
             port:
               number: 12000
   tls: 
