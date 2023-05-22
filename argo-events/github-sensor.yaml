@@ -17,7 +17,7 @@ spec:
           - path: headers.X-Github-Event
             type: string
             value:
-              - pull_request
+              - push
           - path: body.action
             type: string
             value:
