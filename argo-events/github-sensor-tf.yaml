@@ -27,14 +27,16 @@ spec:
               apiVersion: argoproj.io/v1alpha1
               kind: Workflow
               metadata:
-                generateName: github-
-                labels:
-                  azure.workload.identity/use: "true"                
-              spec:              
-                entrypoint: whalesay 
+                generateName: github-              
+              spec:
+                workflowMetadata:
+                  labels:
+                    azure.workload.identity/use: "true"                           
+                entrypoint: main 
                 arguments:
                   parameters:
                     - name: repo-url
+                serviceAccountName: terraform-app-sa
                 templates:
                   - name: whalesay
                     inputs:
@@ -57,13 +59,19 @@ spec:
                         - name: tfconfig
                           path: /tfconfig
                   - name: azcli
-                    serviceAccountName: terraform-app-sa 
                     container:
                       - image: mcr.microsoft.com/azure-cli
                         name: oidc
                         command:  
                         - sleep  
                         - "6000"        
+                  - name: main
+                    dag:
+                      tasks:
+                        - name: git
+                          template: whalesay
+                        - name: az
+                          template: azcli
           parameters:
             - src:
                 dependencyName: test-dep
@@ -71,4 +79,3 @@ spec:
               dest: spec.arguments.parameters.0.value
       retryStrategy:
         steps: 3
-        
