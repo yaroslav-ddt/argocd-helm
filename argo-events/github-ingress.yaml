@@ -29,7 +29,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: webhook
+            name: webhook-eventsource-svc
             port:
               number: 13000
   tls: 
