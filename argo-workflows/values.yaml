@@ -2,8 +2,9 @@ argo-workflows:
   singleNamespace: false
   fullnameOverride: "argo"
   workflow:
+    create: true
     serviceAccount:
-      name: "argo"
+      name: "argo-workflow"
     rbac:
       create: true
   controller:
@@ -23,7 +24,7 @@ argo-workflows:
     workflowDefaults:
       spec:
         # set default serviceAccount
-        serviceAccountName: argo
+        serviceAccountName: argo-workflow
 
     # -- The number of controller pods to run
     replicas: 1
