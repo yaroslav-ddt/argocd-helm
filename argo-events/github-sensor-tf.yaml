@@ -56,7 +56,7 @@ spec:
                       artifacts:
                         - name: tfconfig
                           path: /tfconfig
-                  - name: az-cli
+                  - name: azcli
                     serviceAccountName: terraform-app-sa                  
                     containers:
                       - image: mcr.microsoft.com/azure-cli
@@ -71,4 +71,3 @@ spec:
               dest: spec.arguments.parameters.0.value
       retryStrategy:
         steps: 3
-        
