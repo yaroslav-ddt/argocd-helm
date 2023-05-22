@@ -45,7 +45,7 @@ spec:
           parameters:
             - src:
                 dependencyName: test-dep
-                dataKey: body
+                dataKey: body.head_commit.modified
               dest: spec.arguments.parameters.0.value
       retryStrategy:
         steps: 3
