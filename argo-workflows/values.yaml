@@ -2,7 +2,7 @@ argo-workflows:
   singleNamespace: false
   fullnameOverride: "argo"
   workflow:
-    create: true
+    create: false
     serviceAccount:
       name: "argo-workflow"
     rbac:
