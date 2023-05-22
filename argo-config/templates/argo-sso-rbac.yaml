@@ -269,3 +269,4 @@ subjects:
 - kind: ServiceAccount
   name: argo-sso-admin
   namespace: {{ include "argo.namespace" . }}
+---
