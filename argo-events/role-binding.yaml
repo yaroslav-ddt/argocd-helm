@@ -21,6 +21,18 @@ metadata:
   creationTimestamp: "2023-05-16T16:44:02Z"
   name: argo-workflow
   namespace: argo-events
+secrets:
+  - name: argo-workflow-token
+---
+# k8s does not create token automatically
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  namespace: argo-events
+  name: argo-workflow-token
+  annotations:
+    kubernetes.io/service-account.name: argo-workflow
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
