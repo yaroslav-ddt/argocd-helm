@@ -22,8 +22,6 @@ spec:
             type: string
           - path: body.repository
             type: string
-            value:
-              - open
           - path: body.pusher
             type: string
             value:
