@@ -16,22 +16,7 @@ spec:
           - path: headers.X-Github-Event
             type: string
             value:
-              - pull_request
-          - path: body.action
-            type: string
-            value:
-              - opened
-              - edited
-              - reopened
-              - synchronize
-          - path: body.pull_request.state
-            type: string
-            value:
-              - open
-          - path: body.pull_request.base.ref
-            type: string
-            value:
-              - main
+              - push
   triggers:
     - template:
         name: github-workflow-trigger
@@ -48,15 +33,11 @@ spec:
                 arguments:
                   parameters:
                     - name: pr-title
-                    - name: pr-number
-                    - name: short-sha
                 templates:
                   - name: whalesay
                     inputs:
                       parameters:
                         - name: pr-title
-                        - name: pr-number
-                        - name: short-sha
                     container:
                       image: docker/whalesay:latest
                       command: [cowsay]
@@ -64,22 +45,7 @@ spec:
           parameters:
             - src:
                 dependencyName: test-dep
-                dataKey: body.pull_request.title
+                dataKey: body
               dest: spec.arguments.parameters.0.value
-            - src:
-                dependencyName: test-dep
-                dataKey: body.pull_request.number
-              dest: spec.arguments.parameters.1.value
-            - src:
-                dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.pull_request.head.sha | substr 0 7 }}"
-              dest: spec.arguments.parameters.2.value
-            # Append pull request number and short sha to dynamically assign workflow name <github-21500-2c065a>
-            - src:
-                dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.pull_request.number }}-{{ .Input.body.pull_request.head.sha | substr 0 7 }}"
-              dest: metadata.name
-              operation: append
       retryStrategy:
-        steps: 3
-        
+        steps: 3        
