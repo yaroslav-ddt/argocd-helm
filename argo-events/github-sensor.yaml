@@ -18,15 +18,6 @@ spec:
             type: string
             value:
               - push
-          - path: body.ref
-            type: string
-          - path: body.repository
-            type: string
-          - path: body.pusher
-            type: string
-            value:
-              - date
-              - name
   triggers:
     - template:
         name: github-workflow-trigger
