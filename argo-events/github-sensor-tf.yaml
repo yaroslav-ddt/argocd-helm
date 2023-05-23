@@ -17,6 +17,11 @@ spec:
             type: string
             value:
               - push
+          - path: body.head_commit.modified.0.value
+            type: string
+            comparator:  ">"
+            value:
+              - apps-tf
   triggers:
     - template:
         name: github-workflow-trigger
@@ -34,7 +39,7 @@ spec:
                   parameters:
                     - name: repo-url
                 templates:
-                  - name: whalesay
+                  - name: git
                     inputs:
                       parameters:
                         - name: repo-url
@@ -55,24 +60,65 @@ spec:
                       artifacts:
                         - name: tfconfig
                           path: /tfconfig
-                  - name: azcli
+                  - name: tf-app
                     serviceAccountName: terraform-app-sa
                     metadata:
                       labels:
-                        azure.workload.identity/use: "true"                     
+                        azure.workload.identity/use: "true"              
                     container:
-                      image: mcr.microsoft.com/azure-cli
-                      name: oidc
-                      command:  
-                        - sleep  
-                        - "6000"        
+                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:3b03a7b610cb7ea18e454dac7b1ef589a75c0b5b
+                      name: tf-app
+                      command:
+                        - sh
+                        - entrypoint.sh
+                      args:
+                        - terraform
+                        - plan
+                        - "-var-file=/tfconfig/apps-tf/testapp/config.tfvars"
+                        - "-input=false"
+                        - "-out=/tfplan/tfplan"
+                        - "-var oidc_issuer_url=$OIDC_ISSUER_URL"
+                        - "-var virtual_network_subnet_ids=[$VIRTUAL_NETWORK_SUBNET_IDS]"
+                      env:
+                        - name: ARM_SUBSCRIPTION_ID
+                          valueFrom:
+                            configMapKeyRef:
+                              name: tf-configmap
+                              key: az_subscription_id
+                        - name: STATE_RG
+                          valueFrom:
+                            configMapKeyRef:
+                              name: tf-configmap
+                              key: app_state_rg
+                        - name: STATE_SA
+                          valueFrom:
+                            configMapKeyRef:
+                              name: tf-configmap
+                              key: app_state_sa
+                        - name: STATE_CONTAINER
+                          valueFrom:
+                            configMapKeyRef:
+                              name: tf-configmap
+                              key: app_state_container
+                        - name: OIDC_ISSUER_URL
+                          valueFrom:
+                            configMapKeyRef:
+                              name: tf-configmap
+                              key: oidc_issuer_url
+                        - name: VIRTUAL_NETWORK_SUBNET_IDS
+                          valueFrom:
+                            configMapKeyRef:
+                              name: tf-configmap
+                              key: virtual_network_subnet_ids
+                        - name: APP_NAME
+                          value: "testapp"
                   - name: main
                     dag:
                       tasks:
                         - name: git
-                          template: whalesay
-                        - name: az
-                          template: azcli
+                          template: git
+                        - name: tf-plan
+                          template: tf-app
           parameters:
             - src:
                 dependencyName: test-dep
