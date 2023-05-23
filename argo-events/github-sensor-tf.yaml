@@ -18,10 +18,10 @@ spec:
             value:
               - push
         exprs:
-          - expr: modified =~ "apps-tf*"
+          - expr: modified =~ "apps-tf"
             fields:
               - name: modified
-                path: body.commits.#(modified.#(%"apps-tf*"))
+                path: body.commits.#(modified.#(%"apps-tf*"))0.modified.0
   triggers:
     - template:
         name: github-workflow-trigger
