@@ -17,11 +17,11 @@ spec:
             type: string
             value:
               - push
-          - path: body.commits.0.modified.0
-            type: string
-            comparator:  ">"
-            value:
-              - apps-tf
+        exprs:
+          - expr: regexMatch "^app-tf/.*" modified
+            fields:
+              - name: modified
+                path: body.commits.#(modified.#(%"apps-tf*"))
   triggers:
     - template:
         name: github-workflow-trigger
