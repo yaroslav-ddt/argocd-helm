@@ -18,7 +18,7 @@ spec:
             value:
               - push
         exprs:
-          - expr: regexMatch "^apps-tf/.*" modified
+          - expr: modified =~ "apps-tf*"
             fields:
               - name: modified
                 path: body.commits.#(modified.#(%"apps-tf*"))
