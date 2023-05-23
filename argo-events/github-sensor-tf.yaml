@@ -17,7 +17,7 @@ spec:
             type: string
             value:
               - push
-          - path: body.commits.modified.0
+          - path: body.commits.0.modified.0
             type: string
             comparator:  ">"
             value:
