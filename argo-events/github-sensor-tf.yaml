@@ -89,17 +89,17 @@ spec:
                           valueFrom:
                             configMapKeyRef:
                               name: tf-configmap
-                              key: app_state_rg
+                              key: state_rg
                         - name: STATE_SA
                           valueFrom:
                             configMapKeyRef:
                               name: tf-configmap
-                              key: app_state_sa
+                              key: state_sa
                         - name: STATE_CONTAINER
                           valueFrom:
                             configMapKeyRef:
                               name: tf-configmap
-                              key: app_state_container
+                              key: state_container
                         - name: OIDC_ISSUER_URL
                           valueFrom:
                             configMapKeyRef:
