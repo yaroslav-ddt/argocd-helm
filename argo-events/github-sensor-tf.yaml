@@ -135,7 +135,5 @@ spec:
                 dependencyName: test-dep
                 dataKey: body.repository.html_url
               dest: spec.arguments.parameters.0.value
-            - src:
-            
       retryStrategy:
         steps: 3
