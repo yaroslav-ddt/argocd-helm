@@ -38,8 +38,6 @@ spec:
                 arguments:
                   parameters:
                     - name: repo-url
-                    - name: oidc_issuer_url
-                    - name: virtual_network_subnet_ids
                 templates:
                   - name: git
                     inputs:
@@ -137,5 +135,7 @@ spec:
                 dependencyName: test-dep
                 dataKey: body.repository.html_url
               dest: spec.arguments.parameters.0.value
+            - src:
+            
       retryStrategy:
         steps: 3
