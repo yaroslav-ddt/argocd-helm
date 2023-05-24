@@ -71,7 +71,9 @@ spec:
                     inputs:
                       artifacts:
                         - name: tfconfig
-                          path: /tfconfig                        
+                          path: /tfconfig
+                    securityContext:
+                      runAsUser: 0                                               
                     script:
                       image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:499bb9067b63270c4ee7e616b359b6c3be8bf269
                       name: tf-app
