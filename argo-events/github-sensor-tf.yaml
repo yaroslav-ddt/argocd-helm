@@ -73,7 +73,7 @@ spec:
                         - name: tfconfig
                           path: /tfconfig                        
                     script:
-                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:499bb9067b63270c4ee7e616b359b6c3be8bf269
+                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:52ea6a72aa5395c8db1b1d3e33c1e04a72afd259
                       name: tf-app
                       command: [ sh, entrypoint.sh]
                       args: ["terraform plan -input=false \
