@@ -138,7 +138,9 @@ spec:
                           arguments:
                             artifacts:
                               - name: tfconfig
-                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"                          
+                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"
+                          dependencies:
+                            - git
           parameters:
             - src:
                 dependencyName: test-dep
