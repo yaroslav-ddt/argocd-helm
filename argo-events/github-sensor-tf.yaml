@@ -85,17 +85,17 @@ spec:
                             configMapKeyRef:
                               name: tf-configmap
                               key: az_subscription_id
-                        - name: STATE_RG
+                        - name: RG_SA_STATE
                           valueFrom:
                             configMapKeyRef:
                               name: tf-configmap
                               key: state_rg
-                        - name: STATE_SA
+                        - name: SA_STATE
                           valueFrom:
                             configMapKeyRef:
                               name: tf-configmap
                               key: state_sa
-                        - name: STATE_CONTAINER
+                        - name: CONTAINER_STATE
                           valueFrom:
                             configMapKeyRef:
                               name: tf-configmap
