@@ -66,7 +66,7 @@ spec:
                       labels:
                         azure.workload.identity/use: "true"              
                     container:
-                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:a89a7f491feb56e7d74b16dc4b379ee4ddb087a1
+                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:499bb9067b63270c4ee7e616b359b6c3be8bf269
                       name: tf-app
                       command:
                         - sh
