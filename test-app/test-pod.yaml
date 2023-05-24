@@ -8,7 +8,7 @@ metadata:
 spec:
   serviceAccountName: terraform-app-sa
   containers:
-    - image: mcr.microsoft.com/azure-cli
+    - image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:3b03a7b610cb7ea18e454dac7b1ef589a75c0b5b
       name: oidc
       command:  
       - sleep  
