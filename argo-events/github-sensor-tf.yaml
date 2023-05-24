@@ -79,8 +79,9 @@ spec:
                         - sh
                         - entrypoint.sh
                       args:
-                        - terraform
-                        - plan
+                        - echo
+                        # - terraform
+                        # - plan
                         - "-var-file=/tfconfig/apps-tf/testapp/config.tfvars"
                         - "-input=false"
                         - "-out=/tfplan/tfplan"
