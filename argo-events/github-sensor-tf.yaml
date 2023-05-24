@@ -135,6 +135,10 @@ spec:
                           template: git
                         - name: tf-plan
                           template: tf-app
+                          arguments:
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"                          
           parameters:
             - src:
                 dependencyName: test-dep
