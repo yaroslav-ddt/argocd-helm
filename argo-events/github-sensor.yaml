@@ -34,7 +34,7 @@ spec:
               metadata:
                 generateName: github-
               spec:
-                entrypoint: whalesay
+                entrypoint: loop-example
                 arguments:
                   parameters:
                     # - name: pr-title
