@@ -37,8 +37,8 @@ spec:
                 entrypoint: whalesay
                 arguments:
                   parameters:
-                    - name: pr-title
-                    - name: pr-modify
+                    # - name: pr-title
+                    - name: message
                 templates:
                   - name: whalesay
                     inputs:
@@ -51,6 +51,9 @@ spec:
                           "{{inputs.parameters.message}}"
                         ]
                   - name: loop-example
+                    inputs:
+                      parameters:
+                        - name: message
                     steps:
                     - - name: print-message
                         template: whalesay
@@ -58,15 +61,15 @@ spec:
                           parameters:
                           - name: message
                             value: "{{item}}"
-                        withItems: {{inputs.parameters.pr-modify}}
+                        withItems: {{inputs.parameters.message}}
           parameters:
-            - src:
-                dependencyName: test-dep
-                dataKey: body.repository.html_url
-              dest: spec.arguments.parameters.0.value
+            # - src:
+            #     dependencyName: test-dep
+            #     dataKey: body.repository.html_url
+            #   dest: spec.arguments.parameters.0.value
             - src:
                 dependencyName: test-dep
                 dataKey: body.commits.#(modified.#(%"apps-tf*"))#.modified.#(%"apps-tf*")#  #.modified.#(%"apps-tf*")
-              dest: spec.arguments.parameters.1.value
+              dest: spec.arguments.parameters.0.value
       retryStrategy:
         steps: 3
