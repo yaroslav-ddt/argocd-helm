@@ -81,7 +81,7 @@ spec:
                       #   - echo
                       args:
                           - sleep
-                          - 6000
+                          - "6000"
                           # - terraform
                           # - plan
                           # - "-input=false"
