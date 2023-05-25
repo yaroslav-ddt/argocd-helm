@@ -84,7 +84,7 @@ spec:
                           # - "6000"
                           - terraform
                           - plan
-                          - "-input=false \
+                          - " -input='false' \
                              -out=/tfplan/tfplan \
                              -var-file=/tfconfig/apps-tf/testapp/config.tfvars \
                              -var oidc_issuer_url='$(OIDC_ISSUER_URL)' \
