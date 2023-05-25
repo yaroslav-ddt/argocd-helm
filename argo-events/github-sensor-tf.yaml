@@ -80,8 +80,9 @@ spec:
                       #   - -c
                       #   - echo
                       args:
-                          - terraform
-                          - plan
+                          # - terraform
+                          # - plan
+                          - echo
                           - "-input=false"
                           - "-out=/tfplan/tfplan"
                           - "-var-file=/tfconfig/apps-tf/testapp/config.tfvars"
