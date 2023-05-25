@@ -80,7 +80,7 @@ spec:
                               "plan",
                               "-input=false",
                               "-out=/tfplan/tfplan",
-                              "-var-file=/tfconfig/apps-tf/testapp/config.tfvars",
+                              "-var-file=/tfconfig/apps-tf/testapp/config.tfvars.json",
                               "-var",
                               "oidc_issuer_url=\"$(OIDC_ISSUER_URL)\"",
                               "-var",
