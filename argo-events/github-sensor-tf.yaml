@@ -77,8 +77,8 @@ spec:
                       name: tf-app
                       command: 
                         - sh
-                        - -c
-                        # - entrypoint.sh
+                        # - -c
+                        - entrypoint.sh
                       args: [ 
                           # "sleep 6000"
                           "terraform plan -input=false \
