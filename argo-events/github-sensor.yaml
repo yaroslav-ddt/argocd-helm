@@ -17,6 +17,11 @@ spec:
             type: string
             value:
               - push
+        exprs:
+          - expr: modified =~ "apps-tf"
+            fields:
+              - name: modified
+                path: body.commits.0.modified.0 #body.commits.#(modified.#(%"apps-tf*"))#.modified.0
   triggers:
     - template:
         name: github-workflow-trigger
@@ -33,19 +38,28 @@ spec:
                 arguments:
                   parameters:
                     - name: pr-title
+                    - name: pr-modify
                 templates:
                   - name: whalesay
                     inputs:
                       parameters:
                         - name: pr-title
+                        - name: pr-modify
                     container:
                       image: docker/whalesay:latest
                       command: [cowsay]
-                      args: ["{{inputs.parameters.pr-title}}"]
+                      args: [
+                          "{{inputs.parameters.pr-title}}",
+                          "{{inputs.parameters.pr-modify}}"
+                        ]
           parameters:
             - src:
                 dependencyName: test-dep
-                dataKey: body.head_commit.modified
+                dataKey: body.repository.html_url
               dest: spec.arguments.parameters.0.value
+            - src:
+                dependencyName: test-dep
+                dataKey: body.commits.#(modified.#(%"apps-tf*"))#.modified
+              dest: spec.arguments.parameters.1.value
       retryStrategy:
         steps: 3
