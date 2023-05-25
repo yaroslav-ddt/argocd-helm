@@ -80,8 +80,8 @@ spec:
                       #   - -c
                       #   - pwd
                       args: [ 
-                          # "sleep 6000"
-                          "terraform plan" #\
+                          "pwd"
+                          # "terraform plan" #\
                           # -input=false \
                           # -out=/tfplan/tfplan \
                           # -var-file=/tfconfig/apps-tf/testapp/config.tfvars \
