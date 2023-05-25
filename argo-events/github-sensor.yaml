@@ -43,15 +43,22 @@ spec:
                   - name: whalesay
                     inputs:
                       parameters:
-                        - name: pr-title
-                        - name: pr-modify
+                        - name: message
                     container:
                       image: docker/whalesay:latest
                       command: [cowsay]
                       args: [
-                          "{{inputs.parameters.pr-title}}",
-                          "{{inputs.parameters.pr-modify}}"
+                          "{{inputs.parameters.message}}"
                         ]
+                  - name: loop-example
+                    steps:
+                    - - name: print-message
+                        template: whalesay
+                        arguments:
+                          parameters:
+                          - name: message
+                            value: "{{item}}"
+                        withItems: {{inputs.parameters.pr-modify}}
           parameters:
             - src:
                 dependencyName: test-dep
