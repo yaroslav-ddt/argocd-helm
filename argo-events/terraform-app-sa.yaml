@@ -6,3 +6,28 @@ metadata:
     azure.workload.identity/client-id: cb1329e4-da7b-4ee0-9f5b-5d192bf8176d
     azure.workload.identity/tenant-id: 703922c4-f042-4683-9e67-a969c8abc975
   name: terraform-app-sa
+---
+# Role for Terraform sa to path  in all namespaces
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: argo-pods-patch-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argo-pods-patch-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: argo-pods-patch-role
+subjects:
+- kind: ServiceAccount
+  name: terraform-app-sa
