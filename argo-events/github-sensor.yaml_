@@ -37,7 +37,7 @@ spec:
                 entrypoint: loop-example
                 arguments:
                   parameters:
-                    - name: message
+                    - name: messages
                 templates:
                   - name: whalesay
                     inputs:
@@ -49,10 +49,11 @@ spec:
                       args: [
                           "{{inputs.parameters.message}}"
                         ]
+
                   - name: loop-example
                     inputs:
                       parameters:
-                        - name: message
+                        - name: messages
                     steps:
                     - - name: print-message
                         template: whalesay
@@ -60,7 +61,7 @@ spec:
                           parameters:
                           - name: message
                             value: "{{item}}"
-                        withParam: {{inputs.parameters.message}}
+                        withParam: "{{inputs.parameters.messages}}"
           parameters:
             # - src:
             #     dependencyName: test-dep
