@@ -75,18 +75,18 @@ spec:
                     container:
                       image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:52ea6a72aa5395c8db1b1d3e33c1e04a72afd259
                       name: tf-app
-                      command: 
-                        - sh
-                        - -c
-                        - pwd
-                      # args: [ 
-                      #     "sleep 6000"
-                      #     # "terraform plan -input=false \
-                      #     # -out=/tfplan/tfplan \
-                      #     # -var-file=/tfconfig/apps-tf/testapp/config.tfvars \
-                      #     # -var oidc_issuer_url='$(OIDC_ISSUER_URL)' \
-                      #     # -var virtual_network_subnet_ids='[$(VIRTUAL_NETWORK_SUBNET_IDS)]'"
-                      #   ]
+                      # command: 
+                      #   - sh
+                      #   - -c
+                      #   - pwd
+                      args: [ 
+                          # "sleep 6000"
+                          "terraform plan -input=false \
+                          -out=/tfplan/tfplan \
+                          -var-file=/tfconfig/apps-tf/testapp/config.tfvars \
+                          -var oidc_issuer_url='$(OIDC_ISSUER_URL)' \
+                          -var virtual_network_subnet_ids='[$(VIRTUAL_NETWORK_SUBNET_IDS)]'"
+                        ]
                       env:
                         - name: ARM_SUBSCRIPTION_ID
                           valueFrom:
