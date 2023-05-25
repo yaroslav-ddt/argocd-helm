@@ -75,11 +75,12 @@ spec:
                     container:
                       image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:8f45797f8a5c740c3f33d4458210273c63d57645
                       name: tf-app
-                      command: 
-                        - sh
-                        - -c
-                        - echo
+                      # command: 
+                      #   - sh
+                      #   - -c
+                      #   - echo
                       args:
+                          - echo
                           - terraform
                           - plan
                           - "-input=false"
@@ -123,12 +124,12 @@ spec:
                       volumeMounts:
                         - mountPath: /tfplan
                           name: tfplan
-                    outputs:
-                      artifacts:
-                        - name: tfplan
-                          path: /tfplan/tfplan
-                          archive:
-                            none: {}
+                    # outputs:
+                    #   artifacts:
+                    #     - name: tfplan
+                    #       path: /tfplan/tfplan
+                    #       archive:
+                    #         none: {}
                   - name: main
                     dag:
                       tasks:
