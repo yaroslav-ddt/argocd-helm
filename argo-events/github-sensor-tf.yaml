@@ -80,14 +80,15 @@ spec:
                       #   - -c
                       #   - echo
                       args:
-                          - echo
-                          - terraform
-                          - plan
-                          - "-input=false"
-                          - "-out=/tfplan/tfplan"
-                          - "-var-file=/tfconfig/apps-tf/testapp/config.tfvars"
-                          - "-var oidc_issuer_url='$(OIDC_ISSUER_URL)'"
-                          - "-var virtual_network_subnet_ids='[$(VIRTUAL_NETWORK_SUBNET_IDS)]'"
+                          - sleep
+                          - 6000
+                          # - terraform
+                          # - plan
+                          # - "-input=false"
+                          # - "-out=/tfplan/tfplan"
+                          # - "-var-file=/tfconfig/apps-tf/testapp/config.tfvars"
+                          # - "-var oidc_issuer_url='$(OIDC_ISSUER_URL)'"
+                          # - "-var virtual_network_subnet_ids='[$(VIRTUAL_NETWORK_SUBNET_IDS)]'"
                       env:
                         - name: ARM_SUBSCRIPTION_ID
                           valueFrom:
