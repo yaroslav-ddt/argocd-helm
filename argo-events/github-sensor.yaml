@@ -37,7 +37,6 @@ spec:
                 entrypoint: loop-example
                 arguments:
                   parameters:
-                    # - name: pr-title
                     - name: message
                 templates:
                   - name: whalesay
@@ -61,7 +60,7 @@ spec:
                           parameters:
                           - name: message
                             value: "{{item}}"
-                        withItems: {{inputs.parameters.message}}
+                        withParam: {{inputs.parameters.message}}
           parameters:
             # - src:
             #     dependencyName: test-dep
