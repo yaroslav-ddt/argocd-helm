@@ -109,14 +109,17 @@ spec:
                           dependencies:
                             - jq-app-name
                             - jq-tf-version
-                        # - name: tf-apply
-                        #   template: tf-apply
-                        #   arguments:
-                        #     artifacts:
-                        #       - name: tfplan
-                        #         from: "{{tasks.tf-plan.outputs.artifacts.tfplan}}"
-                        #   dependencies:
-                        #     - tf-plan
+                        - name: tf-apply
+                          template: tf-apply
+                          arguments:
+                            parameters:
+                              - name: app_name
+                                value: "{{tasks.jq-app-name.outputs.result}}"                          
+                            artifacts:
+                              - name: tfplan
+                                from: "{{tasks.tf-plan.outputs.artifacts.tfplan}}"
+                          dependencies:
+                            - tf-plan
 
                   - name: git
                     inputs:
