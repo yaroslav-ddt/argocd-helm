@@ -207,6 +207,7 @@ spec:
                             none: {}
                   - name: wait
                     suspend: {}
+
                   - name: main
                     inputs:
                       parameters:
@@ -215,18 +216,25 @@ spec:
                       tasks:
                         - name: git
                           template: git
-                        - name: jq
-                          template: jq
+                        - name: print-message
+                          template: whalesay
                           arguments:
                             parameters:
-                            - name: config
+                            - name: message
                               value: "{{item}}"
-                            artifacts:
-                              - name: tfconfig
-                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"                              
-                          withParam: "{{inputs.parameters.modified-configs}}"
-                          dependencies:
-                            - git                          
+                          withParam: "{{inputs.parameters.modified-configs}}"                          
+                        # - name: jq
+                        #   template: jq
+                        #   arguments:
+                        #     parameters:
+                        #     - name: config
+                        #       value: "{{item}}"
+                        #     artifacts:
+                        #       - name: tfconfig
+                        #         from: "{{tasks.git.outputs.artifacts.tfconfig}}"                              
+                        #   withParam: "{{inputs.parameters.modified-configs}}"
+                        #   dependencies:
+                        #     - git                          
                         # - name: tf-plan
                         #   template: tf-plan
                         #   arguments:
@@ -250,7 +258,7 @@ spec:
               dest: spec.arguments.parameters.0.value
             - src:
                 dependencyName: test-dep
-                dataKey: body.commits.#(modified.#(%"apps-tf*"))#.modified.#(%"apps-tf*config.tfvars.json")#|@flatten  #.modified.#(%"apps-tf*")
+                dataKey: body.commits.#(modified.#(%"apps-tf*"))#.modified.#(%"apps-tf*")#|@flatten   #.modified.#(%"apps-tf*")
               dest: spec.arguments.parameters.1.value              
       retryStrategy:
         steps: 3
