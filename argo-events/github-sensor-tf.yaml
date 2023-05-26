@@ -49,11 +49,13 @@ spec:
                         - name: git-app-repo
                           template: git
                         - name: tf
-                          template: tf-dag
+                          template: jq
                           arguments:
                             parameters:
                               - name: modified-config
                                 value: "{{item}}"
+                              - name: jq-filter
+                                value: ".app_name"
                             artifacts:
                               - name: tfconfig
                                 from: "{{tasks.git-app-repo.outputs.artifacts.tfconfig}}"                                
