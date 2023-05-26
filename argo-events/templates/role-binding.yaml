@@ -14,7 +14,7 @@ subjects:
   namespace: argo
 
 ---
-# binding argo-workflow-executor-role to argo service account in argo-events allow to run pods
+# binding argo-workflow-executor-role to argo service account in argo-events to allow to run pods
 apiVersion: v1
 kind: ServiceAccount
 metadata:

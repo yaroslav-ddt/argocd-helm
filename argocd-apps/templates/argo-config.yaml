@@ -17,7 +17,7 @@ spec:
     path: argo-config
     targetRevision: {{ .Values.argocd.spec.sources.applications.targetRevision }}
     helm:
-      releaseName: argocd-config
+      releaseName: argo-config
       valueFiles:
       - $values/{{ .Values.argocd.spec.sources.values.valuesfile }}
   - repoURL: {{ .Values.argocd.spec.sources.values.repoURL }}

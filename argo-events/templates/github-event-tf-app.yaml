@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-events
+  name: github-event-tf-app
   namespace: {{ include "argocd.namespace" . }}
   annotations:
     argocd.argoproj.io/sync-wave: "2"  
@@ -12,17 +12,10 @@ spec:
     namespace: argo-events
     server: {{ include "argocd.destination.server" . }}
   project: {{ include "argocd.projectname" . }}
-  sources:
-  - repoURL: {{ .Values.argocd.spec.sources.applications.repoURL }}
-    path: argo-events
+  source:
+    repoURL: {{ .Values.argocd.spec.sources.applications.repoURL }}
+    path: github-event
     targetRevision: {{ .Values.argocd.spec.sources.applications.targetRevision }}
-    helm:
-      releaseName: argo-events
-      valueFiles:
-      - $values/{{ .Values.argocd.spec.sources.values.valuesfile }}
-  - repoURL: {{ .Values.argocd.spec.sources.values.repoURL }}
-    targetRevision: {{ .Values.argocd.spec.sources.values.targetRevision }}
-    ref: values
   syncPolicy:
     automated:
       prune: true
