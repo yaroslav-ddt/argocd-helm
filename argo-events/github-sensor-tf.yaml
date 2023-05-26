@@ -51,8 +51,8 @@ spec:
                       image: stedolan/jq:latest
                       command: ["/usr/local/bin/jq"]
                       args: [
-                              "/tfconfig/{{inputs.parameters.config}}",
-                              "'.app_name'"
+                              "'.app_name'",
+                              "/tfconfig/{{inputs.parameters.config}}"
                             ]
                   - name: whalesay
                     inputs:
