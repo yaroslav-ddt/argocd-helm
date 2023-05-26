@@ -24,7 +24,6 @@ spec:
     targetRevision: {{ .Values.argocd.spec.sources.values.targetRevision }}
     ref: values
   syncPolicy:
-    automated: {}
     syncOptions:
     - CreateNamespace=true
     # syncOptions:
