@@ -99,6 +99,8 @@ spec:
                             parameters:
                               - name: app_name
                                 value: "{{tasks.jq-app-name.outputs.result}}"
+                              - name: config
+                                value: "{{inputs.parameters.modified-config}}"                                
                               - name: tf_version
                                 value: "{{tasks.jq-tf-version.outputs.result}}"
                             artifacts:
@@ -165,6 +167,7 @@ spec:
                     inputs:
                       parameters:
                         - name: app_name
+                        - name: config
                         - name: tf_version
                       artifacts:
                         - name: tfconfig
@@ -177,7 +180,7 @@ spec:
                               "plan",
                               "-input=false",
                               "-out=/tfplan/tfplan",
-                              "-var-file=/tfconfig/apps-tf/testapp/config.tfvars.json",
+                              "-var-file=/tfconfig/{{inputs.parameters.config}}",
                               "-var",
                               "oidc_issuer_url=\"$(OIDC_ISSUER_URL)\"",
                               "-var",
