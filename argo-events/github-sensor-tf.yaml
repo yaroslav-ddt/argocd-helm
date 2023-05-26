@@ -44,6 +44,7 @@ spec:
                     inputs:
                       parameters:
                         - name: config
+                        - name: jq-filter
                       artifacts:
                         - name: tfconfig
                           path: /tfconfig                     
@@ -51,19 +52,9 @@ spec:
                       image: stedolan/jq:latest
                       command: ["/usr/local/bin/jq"]
                       args: [
-                              ".app_name",
+                              "{{inputs.parameters.jq-filter}}",
                               "/tfconfig/{{inputs.parameters.config}}"
-                            ]
-                  - name: whalesay
-                    inputs:
-                      parameters:
-                        - name: message
-                    container:
-                      image: docker/whalesay:latest
-                      command: [cowsay]
-                      args: [
-                              "{{inputs.parameters.message}}"
-                            ]                
+                            ]              
                   - name: git
                     inputs:
                       parameters:
@@ -94,11 +85,14 @@ spec:
                       - emptyDir: {}
                         name: tfplan
                     inputs:
+                      parameters:
+                        - name: app_name
+                        - name: tf_version
                       artifacts:
                         - name: tfconfig
                           path: /tfconfig                        
                     container:
-                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:8f45797f8a5c740c3f33d4458210273c63d57645
+                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:"{{inputs.parameters.tf_version}}"
                       name: tf-app
                       args: [
                               "terraform",
@@ -143,7 +137,7 @@ spec:
                               name: tf-configmap
                               key: virtual_network_subnet_ids
                         - name: APP_NAME
-                          value: "testapp"
+                          value: "{{inputs.parameters.app_name}}"
                       volumeMounts:
                         - mountPath: /tfplan
                           name: tfplan
@@ -158,15 +152,15 @@ spec:
                     metadata:
                       labels:
                         azure.workload.identity/use: "true"
-                    volumes:
-                      - emptyDir: {}
-                        name: tfplan
                     inputs:
+                      parameters:
+                        - name: app_name
+                        - name: tf_version
                       artifacts:
                         - name: tfplan
                           path: /tfplan/tfplan
                     container:
-                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:8f45797f8a5c740c3f33d4458210273c63d57645
+                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:"{{inputs.parameters.tf_version}}"
                       name: tf-app
                       args: [
                               "terraform",
@@ -196,16 +190,10 @@ spec:
                               name: tf-configmap
                               key: state_container
                         - name: APP_NAME
-                          value: "testapp"
+                          value: "{{inputs.parameters.app_name}}"
                       volumeMounts:
                         - mountPath: /tfplan
                           name: tfplan
-                    outputs:
-                      artifacts:
-                        - name: tfplan
-                          path: /tfplan/tfplan
-                          archive:
-                            none: {}
                   - name: wait
                     suspend: {}
 
@@ -216,34 +204,50 @@ spec:
                     dag:
                       tasks:
                         - name: git
-                          template: git
-                        # - name: print-message
-                        #   template: whalesay
-                        #   arguments:
-                        #     parameters:
-                        #     - name: message
-                        #       value: "{{item}}"
-                        #   withParam: "{{inputs.parameters.modified-configs}}"                          
-                        - name: jq
+                          template: git                       
+                        - name: jq-app-name
                           template: jq
                           arguments:
                             parameters:
-                            - name: config
-                              value: "{{item}}"
+                              - name: config
+                                value: "{{item}}"
+                              - name: jq-filter
+                                value: ".app_name"
                             artifacts:
                               - name: tfconfig
                                 from: "{{tasks.git.outputs.artifacts.tfconfig}}"                              
                           withParam: "{{inputs.parameters.modified-configs}}"
                           dependencies:
-                            - git                          
-                        # - name: tf-plan
-                        #   template: tf-plan
-                        #   arguments:
-                        #     artifacts:
-                        #       - name: tfconfig
-                        #         from: "{{tasks.git.outputs.artifacts.tfconfig}}"
-                        #   dependencies:
-                        #     - message
+                            - git
+                        - name: jq-tf-version
+                          template: jq
+                          arguments:
+                            parameters:
+                              - name: config
+                                value: "{{item}}"
+                              - name: jq-filter
+                                value: ".tf_version"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"                              
+                          withParam: "{{inputs.parameters.modified-configs}}"
+                          dependencies:
+                            - git
+
+                        - name: tf-plan
+                          template: tf-plan
+                          arguments:
+                            parameters:
+                              - name: app_name
+                                value: "{{tasks.jq-app-name.outputs.result}}"
+                              - name: tf_version
+                                value: "{{tasks.jq-tf-version.outputs.result}}"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"
+                          dependencies:
+                            - jq-app-name
+                            - jq-tf-version
                         # - name: tf-apply
                         #   template: tf-apply
                         #   arguments:
