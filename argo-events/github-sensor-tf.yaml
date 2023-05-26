@@ -40,21 +40,74 @@ spec:
                     - name: repo-url
                     - name: modified-configs
                 templates:
-                  - name: jq
+                  - name: main
+                    dag:
+                      tasks:
+                        - name: git
+                          template: git
+                        - name: tf
+                          template: tf-dag
+                          arguments:
+                            parameters:
+                              - name: modified-config
+                                value: "{{item}}"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"                                
+                          withParam: "{{inputs.parameters.modified-configs}}"                          
+                  - name: tf-dag
                     inputs:
                       parameters:
-                        - name: config
-                        - name: jq-filter
+                        - name: modified-config
                       artifacts:
-                        - name: tfconfig
-                          path: /tfconfig                     
-                    container:
-                      image: stedolan/jq:latest
-                      command: ["/usr/local/bin/jq"]
-                      args: [
-                              "{{inputs.parameters.jq-filter}}",
-                              "/tfconfig/{{inputs.parameters.config}}"
-                            ]              
+                        - name: tfconfig             
+                    dag:
+                      tasks:                   
+                        - name: jq-app-name
+                          template: jq
+                          arguments:
+                            parameters:
+                              - name: config
+                                value: {{inputs.parameters.modified-config}}
+                              - name: jq-filter
+                                value: ".app_name"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{inputs.artifacts.tfconfig}}"                              
+                        - name: jq-tf-version
+                          template: jq
+                          arguments:
+                            parameters:
+                              - name: config
+                                value: {{inputs.parameters.modified-config}}
+                              - name: jq-filter
+                                value: ".tf_version"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{inputs.artifacts.tfconfig}}"
+                        - name: tf-plan
+                          template: tf-plan
+                          arguments:
+                            parameters:
+                              - name: app_name
+                                value: "{{tasks.jq-app-name.outputs.result}}"
+                              - name: tf_version
+                                value: "{{tasks.jq-tf-version.outputs.result}}"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{inputs.artifacts.tfconfig}}"
+                          dependencies:
+                            - jq-app-name
+                            - jq-tf-version
+                        # - name: tf-apply
+                        #   template: tf-apply
+                        #   arguments:
+                        #     artifacts:
+                        #       - name: tfplan
+                        #         from: "{{tasks.tf-plan.outputs.artifacts.tfplan}}"
+                        #   dependencies:
+                        #     - tf-plan
+                        
                   - name: git
                     inputs:
                       parameters:
@@ -76,6 +129,22 @@ spec:
                       artifacts:
                         - name: tfconfig
                           path: /tfconfig
+
+                  - name: jq
+                    inputs:
+                      parameters:
+                        - name: config
+                        - name: jq-filter
+                      artifacts:
+                        - name: tfconfig
+                          path: /tfconfig                     
+                    container:
+                      image: stedolan/jq:latest
+                      command: ["/usr/local/bin/jq"]
+                      args: [
+                              "{{inputs.parameters.jq-filter}}",
+                              "/tfconfig/{{inputs.parameters.config}}"
+                            ]
                   - name: tf-plan
                     serviceAccountName: terraform-app-sa
                     metadata:
@@ -196,66 +265,7 @@ spec:
                           name: tfplan
                   - name: wait
                     suspend: {}
-
-                  - name: main
-                    inputs:
-                      parameters:
-                        - name: modified-configs                    
-                    dag:
-                      tasks:
-                        - name: git
-                          template: git                       
-                        - name: jq-app-name
-                          template: jq
-                          arguments:
-                            parameters:
-                              - name: config
-                                value: "{{item}}"
-                              - name: jq-filter
-                                value: ".app_name"
-                            artifacts:
-                              - name: tfconfig
-                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"                              
-                          withParam: "{{inputs.parameters.modified-configs}}"
-                          dependencies:
-                            - git
-                        - name: jq-tf-version
-                          template: jq
-                          arguments:
-                            parameters:
-                              - name: config
-                                value: "{{item}}"
-                              - name: jq-filter
-                                value: ".tf_version"
-                            artifacts:
-                              - name: tfconfig
-                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"                              
-                          withParam: "{{inputs.parameters.modified-configs}}"
-                          dependencies:
-                            - git
-
-                        - name: tf-plan
-                          template: tf-plan
-                          arguments:
-                            parameters:
-                              - name: app_name
-                                value: "{{tasks.jq-app-name.outputs.result}}"
-                              - name: tf_version
-                                value: "{{tasks.jq-tf-version.outputs.result}}"
-                            artifacts:
-                              - name: tfconfig
-                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"
-                          dependencies:
-                            - jq-app-name
-                            - jq-tf-version
-                        # - name: tf-apply
-                        #   template: tf-apply
-                        #   arguments:
-                        #     artifacts:
-                        #       - name: tfplan
-                        #         from: "{{tasks.tf-plan.outputs.artifacts.tfplan}}"
-                        #   dependencies:
-                        #     - tf-plan                           
+                      
           parameters:
             - src:
                 dependencyName: test-dep
