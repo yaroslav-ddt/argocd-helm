@@ -1,0 +1,16 @@
+
+argocd:
+  domainname: argocd.crabdance.com
+  projectname: argocd
+  namespace: argocd
+  spec:
+    destination:
+      server: https://kubernetes.default.svc
+    sources:
+      applications:
+        repoURL: https://github.com/yaroslav-ddt/argocd-helm.git
+        targetRevision: HEAD
+      values:
+        repoURL: https://github.com/yaroslav-ddt/argocd-helm.git
+        targetRevision: HEAD
+        valuesfile: values-yy.yaml
