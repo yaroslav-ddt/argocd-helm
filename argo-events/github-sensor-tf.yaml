@@ -41,6 +41,9 @@ spec:
                     - name: modified-configs
                 templates:
                   - name: main
+                    inputs:
+                      parameters:
+                        - name: modified-configs                  
                     dag:
                       tasks:
                         - name: git
@@ -107,7 +110,7 @@ spec:
                         #         from: "{{tasks.tf-plan.outputs.artifacts.tfplan}}"
                         #   dependencies:
                         #     - tf-plan
-                        
+
                   - name: git
                     inputs:
                       parameters:
