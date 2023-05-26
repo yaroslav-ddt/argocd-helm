@@ -42,7 +42,7 @@ spec:
                 templates:
                   - name: jq
                     inputs:
-                      paramters:
+                      parameters:
                         - name: config
                       artifacts:
                         - name: tfconfig
@@ -216,25 +216,25 @@ spec:
                       tasks:
                         - name: git
                           template: git
-                        - name: print-message
-                          template: whalesay
-                          arguments:
-                            parameters:
-                            - name: message
-                              value: "{{item}}"
-                          withParam: "{{inputs.parameters.modified-configs}}"                          
-                        # - name: jq
-                        #   template: jq
+                        # - name: print-message
+                        #   template: whalesay
                         #   arguments:
                         #     parameters:
-                        #     - name: config
+                        #     - name: message
                         #       value: "{{item}}"
-                        #     artifacts:
-                        #       - name: tfconfig
-                        #         from: "{{tasks.git.outputs.artifacts.tfconfig}}"                              
-                        #   withParam: "{{inputs.parameters.modified-configs}}"
-                        #   dependencies:
-                        #     - git                          
+                        #   withParam: "{{inputs.parameters.modified-configs}}"                          
+                        - name: jq
+                          template: jq
+                          arguments:
+                            parameters:
+                            - name: config
+                              value: "{{item}}"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"                              
+                          withParam: "{{inputs.parameters.modified-configs}}"
+                          dependencies:
+                            - git                          
                         # - name: tf-plan
                         #   template: tf-plan
                         #   arguments:
