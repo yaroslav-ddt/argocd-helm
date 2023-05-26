@@ -72,7 +72,7 @@ spec:
                           arguments:
                             parameters:
                               - name: config
-                                value: {{inputs.parameters.modified-config}}
+                                value: "{{inputs.parameters.modified-config}}"
                               - name: jq-filter
                                 value: ".app_name"
                             artifacts:
@@ -83,7 +83,7 @@ spec:
                   #         arguments:
                   #           parameters:
                   #             - name: config
-                  #               value: {{inputs.parameters.modified-config}}
+                  #               value: "{{inputs.parameters.modified-config}}"
                   #             - name: jq-filter
                   #               value: ".tf_version"
                   #           artifacts:
