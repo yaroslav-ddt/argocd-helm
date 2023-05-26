@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: EventSource
 metadata:
-  name: github
+  name: argo-apps
   namespace: argo-events
 spec:
   service:
@@ -14,7 +14,7 @@ spec:
       #   port: 13000
       #   targetPort: 13000
   github:
-    example:
+    argo-apps:
       repositories:
         - owner: yaroslav-ddt
           names:
