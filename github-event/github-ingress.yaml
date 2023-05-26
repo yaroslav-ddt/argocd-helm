@@ -19,19 +19,19 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: github-eventsource-svc
+            name: github-argo-apps-eventsource-svc
             port:
               number: 12000
-  - host: argo-events-yy.jumpingcrab.com
-    http:
-      paths:
-      - path: /example
-        pathType: Prefix
-        backend:
-          service:
-            name: webhook-eventsource-svc
-            port:
-              number: 13000
+  # - host: argo-events-yy.jumpingcrab.com
+  #   http:
+  #     paths:
+  #     - path: /example
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: webhook-eventsource-svc
+  #           port:
+  #             number: 13000
   tls: 
   - hosts:
     - argo-events-yy.jumpingcrab.com
