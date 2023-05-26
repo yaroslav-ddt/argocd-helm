@@ -277,9 +277,6 @@ spec:
                               key: state_container
                         - name: APP_NAME
                           value: "{{inputs.parameters.app_name}}"
-                      volumeMounts:
-                        - mountPath: /tfplan
-                          name: tfplan
                   - name: wait
                     suspend: {}
                       
