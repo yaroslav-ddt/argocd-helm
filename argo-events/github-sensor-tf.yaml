@@ -57,26 +57,27 @@ spec:
                             artifacts:
                               - name: tfconfig
                                 from: "{{tasks.git.outputs.artifacts.tfconfig}}"                                
-                          withParam: "{{inputs.parameters.modified-configs}}"                          
-                  # - name: tf-dag
-                  #   inputs:
-                  #     parameters:
-                  #       - name: modified-config
-                  #     artifacts:
-                  #       - name: tfconfig             
-                  #   dag:
-                  #     tasks:                   
-                  #       - name: jq-app-name
-                  #         template: jq
-                  #         arguments:
-                  #           parameters:
-                  #             - name: config
-                  #               value: {{inputs.parameters.modified-config}}
-                  #             - name: jq-filter
-                  #               value: ".app_name"
-                  #           artifacts:
-                  #             - name: tfconfig
-                  #               from: "{{inputs.artifacts.tfconfig}}"                              
+                          withParam: "{{inputs.parameters.modified-configs}}"
+
+                  - name: tf-dag
+                    inputs:
+                      parameters:
+                        - name: modified-config
+                      artifacts:
+                        - name: tfconfig             
+                    dag:
+                      tasks:                   
+                        - name: jq-app-name
+                          template: jq
+                          arguments:
+                            parameters:
+                              - name: config
+                                value: {{inputs.parameters.modified-config}}
+                              - name: jq-filter
+                                value: ".app_name"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{inputs.artifacts.tfconfig}}"                              
                   #       - name: jq-tf-version
                   #         template: jq
                   #         arguments:
