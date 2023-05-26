@@ -78,39 +78,39 @@ spec:
                             artifacts:
                               - name: tfconfig
                                 from: "{{inputs.artifacts.tfconfig}}"                              
-                  #       - name: jq-tf-version
-                  #         template: jq
-                  #         arguments:
-                  #           parameters:
-                  #             - name: config
-                  #               value: "{{inputs.parameters.modified-config}}"
-                  #             - name: jq-filter
-                  #               value: ".tf_version"
-                  #           artifacts:
-                  #             - name: tfconfig
-                  #               from: "{{inputs.artifacts.tfconfig}}"
-                  #       - name: tf-plan
-                  #         template: tf-plan
-                  #         arguments:
-                  #           parameters:
-                  #             - name: app_name
-                  #               value: "{{tasks.jq-app-name.outputs.result}}"
-                  #             - name: tf_version
-                  #               value: "{{tasks.jq-tf-version.outputs.result}}"
-                  #           artifacts:
-                  #             - name: tfconfig
-                  #               from: "{{inputs.artifacts.tfconfig}}"
-                  #         dependencies:
-                  #           - jq-app-name
-                  #           - jq-tf-version
-                  #       # - name: tf-apply
-                  #       #   template: tf-apply
-                  #       #   arguments:
-                  #       #     artifacts:
-                  #       #       - name: tfplan
-                  #       #         from: "{{tasks.tf-plan.outputs.artifacts.tfplan}}"
-                  #       #   dependencies:
-                  #       #     - tf-plan
+                        - name: jq-tf-version
+                          template: jq
+                          arguments:
+                            parameters:
+                              - name: config
+                                value: "{{inputs.parameters.modified-config}}"
+                              - name: jq-filter
+                                value: ".tf_version"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{inputs.artifacts.tfconfig}}"
+                        - name: tf-plan
+                          template: tf-plan
+                          arguments:
+                            parameters:
+                              - name: app_name
+                                value: "{{tasks.jq-app-name.outputs.result}}"
+                              - name: tf_version
+                                value: "{{tasks.jq-tf-version.outputs.result}}"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{inputs.artifacts.tfconfig}}"
+                          dependencies:
+                            - jq-app-name
+                            - jq-tf-version
+                        # - name: tf-apply
+                        #   template: tf-apply
+                        #   arguments:
+                        #     artifacts:
+                        #       - name: tfplan
+                        #         from: "{{tasks.tf-plan.outputs.artifacts.tfplan}}"
+                        #   dependencies:
+                        #     - tf-plan
 
                   - name: git
                     inputs:
