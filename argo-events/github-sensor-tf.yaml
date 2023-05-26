@@ -48,11 +48,12 @@ spec:
                         - name: tfconfig
                           path: /tfconfig                     
                     container:
-                      image: stedolan/jq
+                      image: stedolan/jq:latest
+                      command: ["/usr/local/bin/jq"]
                       args: [
-                          "/tfconfig/{{inputs.parameters.config}}",
-                          "'.app_name'"
-                        ]
+                              "/tfconfig/{{inputs.parameters.config}}",
+                              "'.app_name'"
+                            ]
                   - name: whalesay
                     inputs:
                       parameters:
@@ -61,8 +62,8 @@ spec:
                       image: docker/whalesay:latest
                       command: [cowsay]
                       args: [
-                          "{{inputs.parameters.message}}"
-                        ]                
+                              "{{inputs.parameters.message}}"
+                            ]                
                   - name: git
                     inputs:
                       parameters:
