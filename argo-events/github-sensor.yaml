@@ -54,8 +54,9 @@ spec:
                     inputs:
                       parameters:
                         - name: messages
-                    steps:
-                    - - name: print-message
+                    dag:
+                      tasks:
+                      - name: print-message
                         template: whalesay
                         arguments:
                           parameters:
