@@ -40,6 +40,19 @@ spec:
                     - name: repo-url
                     - name: modified-configs
                 templates:
+                  - name: jq
+                    inputs:
+                      paramters:
+                        - name: config
+                      artifacts:
+                        - name: tfconfig
+                          path: /tfconfig                     
+                    container:
+                      image: stedolan/jq
+                      args: [
+                          "/tfconfig/{{inputs.parameters.config}}",
+                          "'.app_name'"
+                        ]
                   - name: whalesay
                     inputs:
                       parameters:
@@ -202,30 +215,33 @@ spec:
                       tasks:
                         - name: git
                           template: git
-                        - name: message
+                        - name: jq
                           arguments:
                             parameters:
-                            - name: message
+                            - name: config
                               value: "{{item}}"
+                            artifacts:
+                              - name: tfconfig
+                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"                              
                           withParam: "{{inputs.parameters.modified-configs}}"
                           dependencies:
                             - git                          
-                        - name: tf-plan
-                          template: tf-plan
-                          arguments:
-                            artifacts:
-                              - name: tfconfig
-                                from: "{{tasks.git.outputs.artifacts.tfconfig}}"
-                          dependencies:
-                            - message
-                        - name: tf-apply
-                          template: tf-apply
-                          arguments:
-                            artifacts:
-                              - name: tfplan
-                                from: "{{tasks.tf-plan.outputs.artifacts.tfplan}}"
-                          dependencies:
-                            - tf-plan                           
+                        # - name: tf-plan
+                        #   template: tf-plan
+                        #   arguments:
+                        #     artifacts:
+                        #       - name: tfconfig
+                        #         from: "{{tasks.git.outputs.artifacts.tfconfig}}"
+                        #   dependencies:
+                        #     - message
+                        # - name: tf-apply
+                        #   template: tf-apply
+                        #   arguments:
+                        #     artifacts:
+                        #       - name: tfplan
+                        #         from: "{{tasks.tf-plan.outputs.artifacts.tfplan}}"
+                        #   dependencies:
+                        #     - tf-plan                           
           parameters:
             - src:
                 dependencyName: test-dep
