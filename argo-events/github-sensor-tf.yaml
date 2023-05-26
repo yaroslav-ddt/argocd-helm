@@ -150,6 +150,7 @@ spec:
                       image: stedolan/jq:latest
                       command: ["/usr/local/bin/jq"]
                       args: [
+                              "-r",
                               "{{inputs.parameters.jq-filter}}",
                               "/tfconfig/{{inputs.parameters.config}}"
                             ]
@@ -169,7 +170,7 @@ spec:
                         - name: tfconfig
                           path: /tfconfig                        
                     container:
-                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:"{{inputs.parameters.tf_version}}"
+                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:{{inputs.parameters.tf_version}}
                       name: tf-app
                       args: [
                               "terraform",
@@ -237,7 +238,7 @@ spec:
                         - name: tfplan
                           path: /tfplan/tfplan
                     container:
-                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:"{{inputs.parameters.tf_version}}"
+                      image: cdpargoyy.azurecr.io/cdpargoyy/argo-app:{{inputs.parameters.tf_version}}
                       name: tf-app
                       args: [
                               "terraform",
