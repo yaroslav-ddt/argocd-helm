@@ -18,7 +18,7 @@ spec:
             value:
               - push
         exprs:
-          - expr: modified =~ "apps-tf%config.tfvars.json"
+          - expr: modified =~ "apps-tf*config.tfvars.json"
             fields:
               - name: modified
                 path: body.commits.0.modified.0 #body.commits.#(modified.#(%"apps-tf*"))#.modified.0
