@@ -114,7 +114,9 @@ spec:
                           arguments:
                             parameters:
                               - name: app_name
-                                value: "{{tasks.jq-app-name.outputs.result}}"                          
+                                value: "{{tasks.jq-app-name.outputs.result}}"
+                              - name: tf_version
+                                value: "{{tasks.jq-tf-version.outputs.result}}"                                                        
                             artifacts:
                               - name: tfplan
                                 from: "{{tasks.tf-plan.outputs.artifacts.tfplan}}"
