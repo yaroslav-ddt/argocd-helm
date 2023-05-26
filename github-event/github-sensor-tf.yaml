@@ -7,7 +7,7 @@ spec:
     serviceAccountName: operate-workflow-sa
   dependencies:
     - name: github-dep
-      eventSourceName: github
+      eventSourceName: github-argo-apps
       eventName: argo-apps
       filters:
         data:
