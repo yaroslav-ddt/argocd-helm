@@ -2,12 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: lookout
-  namespace: lookout
+  namespace: {{ include "argocd.namespace" . }}
   annotations:
     argocd.argoproj.io/sync-wave: "2"    
 spec:
   destination:
-    namespace: {{ include "argocd.namespace" . }}
+    namespace: k8s-lookout
     server: {{ include "argocd.destination.server" . }}
   project: {{ include "argocd.projectname" . }}
   sources:
