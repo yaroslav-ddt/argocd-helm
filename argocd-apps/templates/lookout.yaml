@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lookout
+  namespace: {{ include "argocd.namespace" . }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"    
+spec:
+  destination:
+    namespace: {{ include "argocd.namespace" . }}
+    server: {{ include "argocd.destination.server" . }}
+  project: {{ include "argocd.projectname" . }}
+  sources:
+  - repoURL: {{ .Values.argocd.spec.sources.applications.repoURL }}
+    path: lookout
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true

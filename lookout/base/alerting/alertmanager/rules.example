@@ -1,0 +1,17 @@
+groups:
+- name: example
+  rules:
+  - alert: HighMessageCountTest1
+    expr: avg by (MessagesInPerSec) (irate(kafka_server_brokertopicmetrics_count{topic="kafka-connect-status"}[5m])) > 20
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: High number of incoming messages in topic kafka-connect-status
+  - alert: HighMessageCountTest2
+    expr: avg by (MessagesInPerSec) (irate(kafka_server_brokertopicmetrics_count{topic="test-alert-manager"}[1m])) > 1
+    for: 1m
+    labels:
+      severity: page
+    annotations:
+      summary: High number of incoming messages in test topic

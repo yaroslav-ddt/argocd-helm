@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  namespace: monitoring
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: prometheus-server
+    spec:
+      initContainers:
+      - name: volume-mount-hack
+        image: busybox
+        command: ["sh", "-c", "echo '#Rules file entry' >> /prometheus/prometheus.rules && chown -R 65534:65534 /prometheus"]
+        volumeMounts:
+        - name: prometheus-storage-volume
+          mountPath: /prometheus
+#        - name: prometheus-config-alert-rule-volume
+#          mountPath: /etc/prometheus/prometheus.rules
+      containers:
+        - name: prometheus
+          image: prom/prometheus:v2.2.1
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus/"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/
+            - name: prometheus-storage-volume
+              mountPath: /prometheus/
+          resources:
+            limits:
+              cpu: 500m
+              memory: 2048Mi
+            requests:
+              cpu: 500m
+              memory: 1500Mi
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            defaultMode: 420
+            name: prometheus-server-conf
+#        - name: prometheus-config-alert-rule-volume
+#          configMap:
+#            defaultMode: 420
+#            name: prometheus-alert-rules-conf
+        - name: prometheus-storage-volume
+          persistentVolumeClaim:
+            claimName: prometheus-vol
