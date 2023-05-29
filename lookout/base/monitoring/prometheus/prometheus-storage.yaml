@@ -7,8 +7,7 @@ metadata:
   name: prometheus-storage
 allowVolumeExpansion: true
 parameters:
-  protocol: nfs
-  skuName: Standard_LRS
-provisioner: blob.csi.azure.com
+  skuName: StandardSSD_ZRS
+provisioner: disk.csi.azure.com
 reclaimPolicy: Retain
-volumeBindingMode: Immediate
+volumeBindingMode: WaitForFirstConsumer
