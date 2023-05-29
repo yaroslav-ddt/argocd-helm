@@ -10,8 +10,8 @@ spec:
     namespace: k8s-lookout
     server: {{ include "argocd.destination.server" . }}
   project: {{ include "argocd.projectname" . }}
-  sources:
-  - repoURL: {{ .Values.argocd.spec.sources.applications.repoURL }}
+  source:
+    repoURL: {{ .Values.argocd.spec.sources.applications.repoURL }}
     path: lookout
     targetRevision: HEAD
   syncPolicy:
