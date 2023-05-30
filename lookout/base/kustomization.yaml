@@ -11,6 +11,7 @@ resources:
   - monitoring/prometheus/prometheus-pvc.yaml
   - monitoring/prometheus/prometheus-deployment.yaml
   - monitoring/prometheus/prometheus-service.yaml
+  - monitoring/prometheus/prometheus-ingress.yaml
   - monitoring/grafana/grafana-pvc.yaml
   - monitoring/grafana/grafana.yml
   - logging/elasticsearch/es-discovery-svc.yaml
