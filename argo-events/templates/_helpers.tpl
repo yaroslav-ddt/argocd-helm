@@ -15,3 +15,9 @@
 {{-   $value := default .Values.argocd.spec.destination.server "https://kubernetes.default.svc" -}}
 {{-   $value -}}
 {{- end -}}
+
+{{/* Defining argo-events namespace */}}
+{{- define "argoevents.namespace" -}}
+{{-   $value := default .Values.argo.namespace "argo-events" -}}
+{{-   $value -}}
+{{- end -}}
