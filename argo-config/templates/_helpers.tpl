@@ -15,9 +15,3 @@
 {{-   $value := default .Values.argo.namespace "argo" -}}
 {{-   $value -}}
 {{- end -}}
-
-{{/* Defining argo-events namespace */}}
-{{- define "argoevents.namespace" -}}
-{{-   $value := default .Values.argo.namespace "argo-events" -}}
-{{-   $value -}}
-{{- end -}}
