@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: github-event-tf-app
+  namespace: {{ include "argocd.namespace" . }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"  
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: argo-events
+    server: {{ include "argocd.destination.server" . }}
+  project: {{ include "argocd.projectname" . }}
+  source:
+    repoURL: {{ .Values.argocd.spec.sources.applications.repoURL }}
+    path: queue-event
+    targetRevision: {{ .Values.argocd.spec.sources.applications.targetRevision }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
